@@ -89,142 +89,495 @@ body{font-family:'Poppins','Segoe UI',system-ui,sans-serif;}
 .fp-body{position:absolute;bottom:0;left:0;right:0;padding:12px 14px;}
 .fp-tag{font-family:'Montserrat',sans-serif;font-size:6px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--g);margin-bottom:3px;}
 .fp-name{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;color:var(--wh);line-height:1.1;}
-/* RESPONSIVE OVERRIDES */
-@media(max-width:1024px){
-  .booking-section,.full-port-head{padding-left:24px;padding-right:24px;}
-  .booking-top{grid-template-columns:1fr;}
-  .bk-slide{width:100%;}
-}
-@media(max-width:640px){
-  .booking-section{padding:60px 16px;}
-  .booking-top{grid-template-columns:1fr;}
-  .bk-card{aspect-ratio:4/3;}
-  .bk-btn-row{opacity:1;transform:translateY(0);}
-  .fp-mini{width:180px;height:200px;}
-  .fp-scroller{height:200px;}
-  .full-port-head{padding:0 16px;}
-  .bk-dot{display:block;}
-  /* Inventory responsive */
-  .inv-grid{grid-template-columns:1fr;}
-  /* Nav responsive */
-  #nav{padding:0 16px;}
-  .ncta{padding:8px 12px;font-size:8px;}
-  /* Hero */
-  .hh1{font-size:clamp(40px,11vw,80px);letter-spacing:-2px;}
-  .hsub{font-size:12px;}
-  .hstats{flex-wrap:wrap;}
-  .hst{padding:6px 12px;}
-  .sbar{flex-direction:column;}
-  .sf{border-right:none;border-bottom:1px solid var(--ln);}
-  .sbgo{padding:14px;border-top:1px solid var(--ln);}
-  /* Popups */
-  .udp-wrap{max-height:100vh;border-radius:0;}
-  .udp-actions{flex-wrap:wrap;}
-  .udp-wa,.udp-call{flex:1 1 50%;}
-  .udp-book,.udp-proj-link{flex:1 1 50%;}
-  /* Modal */
-  .mbox{max-height:100vh;border-radius:0;}
-  .s0b,.s2b{grid-template-columns:1fr;}
-  .bgrid{grid-template-columns:1fr 1fr;}
-  /* WLV */
-  .wlv-slide{padding:60px 16px;}
-  .s1-grid,.s2-grid{grid-template-columns:1fr;}
-  /* FAQ */
-  .faq-sec{padding:60px 16px;}
-  .faq-grid{grid-template-columns:1fr;}
-  /* FH */
-  .fhcont{padding:60px 16px;}
-  .fhform{grid-template-columns:1fr;}
-  .fh-ctas{flex-direction:column;}
-  .fhci-row{padding:16px;flex-direction:column;gap:8px;}
-  /* Footer */
-  footer{padding:40px 16px 16px;}
-  .ft-g{grid-template-columns:1fr 1fr;}
-}
-@media(max-width:400px){
-  .hh1{font-size:36px;}
-  .ft-g{grid-template-columns:1fr;}
+
+/* ============================================================
+   PHONE-FIRST RESPONSIVE — Complete system
+   Base = mobile, scale up for desktop
+   ============================================================ */
+
+/* Touch & interaction baseline */
+*{-webkit-tap-highlight-color:transparent;box-sizing:border-box;}
+button,a,[onclick]{touch-action:manipulation;cursor:pointer;}
+
+/* NAV */
+#nav{padding:0 16px;height:54px;}
+.nlinks{display:none;}
+.ncta{padding:9px 14px;font-size:8px;letter-spacing:1.5px;}
+
+/* HERO */
+.hero{min-height:100svh;}
+.hbody{padding:54px 18px 20px;max-width:100%;}
+.hkick{font-size:7px;letter-spacing:3px;}
+.hh1{font-size:clamp(36px,10vw,56px);letter-spacing:-2px;line-height:.88;}
+.hsub{font-size:13px;max-width:300px;}
+/* Search bar stacks on mobile */
+.sbar{flex-direction:column;max-width:100%;border-radius:2px;}
+.sf{border-right:none;border-bottom:1px solid var(--ln);padding:12px 14px;}
+.sf:last-of-type{border-bottom:1px solid var(--ln);}
+.sbgo{padding:14px 16px;width:100%;text-align:center;font-size:10px;letter-spacing:2px;justify-content:center;}
+/* Stats strip */
+.hstats{gap:0;margin-top:24px;flex-wrap:wrap;}
+.hst{padding:8px 12px;border-right:1px solid var(--ln);}
+.hst-n{font-size:26px;}
+.hst-l{font-size:7px;}
+
+/* TRUST STRIP */
+.tstrip{height:44px;}
+
+/* INVENTORY SECTION */
+.sec{padding:56px 16px;}
+.inv-head{display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px;margin-bottom:40px;}
+.inv-filters{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;
+  padding-bottom:4px;display:flex;flex-wrap:nowrap;gap:6px;}
+.inv-filters::-webkit-scrollbar{display:none;}
+.ift{white-space:nowrap;padding:8px 12px;font-size:7px;}
+.inv-grid{grid-template-columns:1fr;gap:12px;}
+.icard{border-radius:2px;}
+.ic-img{height:200px;}
+.ic-body{padding:14px;}
+.ic-proj{font-size:6px;}
+.ic-type{font-size:20px;}
+.ic-loc{font-size:10px;}
+.ic-specs{gap:4px;}
+.ic-spec{font-size:9px;padding:4px 8px;}
+.ic-price{font-size:13px;}
+.ic-price span{font-size:9px;}
+.ic-btns{gap:6px;}
+.ic-view,.ic-adv{padding:10px 8px;font-size:7px;flex:1;}
+
+/* UNIT DETAIL POPUP — full-screen bottom sheet on phone */
+#udPop{padding:0;align-items:flex-end;}
+.udp-wrap{max-height:96svh;border-radius:12px 12px 0 0;overflow:hidden;}
+.udp-head{padding:12px 14px 10px;}
+.udp-proj-tag{font-size:6px;}
+.udp-hn{font-size:20px;}
+.udp-tabs{overflow-x:auto;flex-wrap:nowrap;padding-bottom:0;}
+.udp-tabs::-webkit-scrollbar{display:none;}
+.udp-tab{padding:10px 12px;font-size:7px;white-space:nowrap;flex-shrink:0;}
+.udp-body{overflow-y:auto;}
+.udp-gal-main{aspect-ratio:4/3;}
+.udp-gal-thumbs{gap:6px;padding:8px 14px;}
+.udp-gal-thumb{width:56px;height:56px;}
+.udp-spec-row{grid-template-columns:1fr 1fr;gap:6px;padding:12px 14px;}
+.udp-spec{font-size:9px;}
+.udp-rooms-list{grid-template-columns:1fr;gap:4px;padding:8px 14px;}
+.udp-amen-grid{grid-template-columns:1fr 1fr;gap:6px;padding:12px 14px;}
+.udp-amen{padding:10px;font-size:9px;}
+.udp-loc-info{grid-template-columns:1fr;gap:6px;padding:12px 14px;}
+.udp-actions{flex-wrap:wrap;}
+.udp-wa{flex:1 1 100%;order:-1;font-size:9px;}
+.udp-call{flex:1 1 calc(50% - 1px);border-left:none;border-top:1px solid var(--ln);font-size:9px;}
+.udp-book{flex:1 1 calc(50% - 1px);border-top:1px solid var(--ln);font-size:9px;}
+.udp-proj-link{flex:1 1 100%;border-top:1px solid var(--ln);border-left:none;font-size:9px;}
+
+/* BOOKING CAROUSEL */
+.booking-sec{padding:0;}
+.booking-label{padding:52px 16px 24px;}
+.booking-label h2{font-size:clamp(28px,8vw,44px);letter-spacing:-1px;}
+.booking-label p{font-size:12px;}
+.bk-carousel{position:relative;overflow:hidden;padding:0 0 48px;}
+.bk-body{left:5%;right:5%;max-width:none;top:40%;}
+.bk-num{font-size:8px;letter-spacing:4px;margin-bottom:10px;}
+.bk-name{font-size:clamp(34px,9vw,52px);letter-spacing:-1.5px;}
+.bk-name em{font-size:.9em;}
+.bk-loc{font-size:11px;margin-bottom:12px;}
+.bk-tags{gap:4px;margin-bottom:16px;}
+.bk-tag{font-size:7px;padding:4px 9px;}
+.bk-btns{flex-direction:column;gap:8px;}
+.bk-btn-p,.bk-btn-s{width:100%;text-align:center;padding:13px;font-size:9px;}
+.bk-ctrl{left:5%;bottom:20px;gap:10px;}
+.bk-ctr-txt{font-size:15px;}
+.bk-dots2{gap:5px;}
+.bk-d2{width:20px;}
+.bk-d2.on{width:34px;}
+.bk-arrows2{right:5%;bottom:16px;gap:6px;}
+.bk-arr2{width:40px;height:40px;font-size:18px;}
+
+/* PORTFOLIO 21 PROJECTS */
+.port21-sec{padding:56px 0;}
+.port21-head{text-align:center;padding:0 24px 44px;max-width:700px;margin:0 auto;}
+.port21-head h2{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,5.5vw,68px);font-weight:300;line-height:1;letter-spacing:-2px;color:var(--wh);margin:10px 0 14px;}
+.port21-head p{font-size:12px;}
+/* On mobile: disable animation, enable touch scroll */
+.port21-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.port21-scroll::-webkit-scrollbar{display:none;}
+.port21-track{animation:none;padding:0 16px;}
+.pbc{position:relative;width:360px;height:460px;flex-shrink:0;overflow:hidden;cursor:pointer;border-radius:3px;border:1px solid rgba(255,255,255,.07);transition:border-color .35s,transform .4s,box-shadow .4s;}
+.pbc-name{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--wh);line-height:1.1;margin-bottom:12px;}
+.pbc-yr{position:absolute;top:16px;right:18px;font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;color:rgba(255,255,255,.12);z-index:2;}
+/* Always show CTA on mobile (no hover state) */
+.pbc-cta{opacity:1 !important;transform:translateY(0) !important;background:rgba(201,169,97,.12);border-color:rgba(201,169,97,.35);color:rgba(201,169,97,.8);}
+
+/* PROJECT MODAL */
+#modal{padding:0;align-items:flex-end;}
+.mbox{max-height:96svh;border-radius:12px 12px 0 0;}
+.mhead{padding:12px 14px;}
+.mclose{width:32px;height:32px;font-size:16px;}
+.mtabs{overflow-x:auto;flex-wrap:nowrap;}
+.mtabs::-webkit-scrollbar{display:none;}
+.mtab{padding:10px 12px;font-size:7px;white-space:nowrap;flex-shrink:0;}
+.mbody{overflow-y:auto;}
+.s0h{height:200px;}
+.s0hc{padding:14px;}
+.s0hc .s0hn{font-size:22px;}
+.s0hc .s0hl{font-size:10px;}
+.s0b{grid-template-columns:1fr;gap:12px;padding:14px;}
+.s0sr{grid-template-columns:1fr 1fr;gap:4px;}
+.s0r{display:none;}
+.s2b{grid-template-columns:1fr;gap:12px;padding:14px;}
+.bgrid{grid-template-columns:1fr 1fr;gap:8px;}
+.bc{border-radius:2px;}
+.bc-img{height:100px;}
+.bc-body{padding:8px;}
+.bc-name{font-size:14px;}
+.bc-info{font-size:9px;}
+.s3b{padding:14px;}
+.ablock{margin-bottom:12px;}
+.alabel{font-size:9px;}
+.agrid{grid-template-columns:1fr 1fr;gap:6px;}
+.ait{padding:8px;gap:6px;}
+.ait span:last-child{font-size:9px;}
+
+/* WLV */
+.wlv-slide{padding:56px 16px 72px;}
+.s1-grid,.s2-grid{grid-template-columns:1fr;gap:20px;}
+.wlv-nav{right:8px;gap:4px;}
+.wlv-arrows{right:16px;bottom:20px;gap:6px;}
+.wlv-arrow{width:38px;height:38px;}
+.pstats{gap:4px;}
+.pstat{padding:12px;gap:8px;}
+.pst-n{font-size:26px;}
+.pst-l{font-size:8px;}
+.gen-row{gap:4px;}
+.gc{padding:12px;gap:8px;}
+.gc-y{font-size:24px;}
+.gc-info{font-size:10px;}
+.pillars{gap:4px;}
+.pil{padding:12px;gap:8px;flex-direction:column;}
+.pil-n{font-size:22px;}
+.voice-strips{gap:4px;}
+.vs{padding:12px;gap:8px;}
+.vs-av{width:36px;height:36px;font-size:14px;}
+.vs-qt{font-size:11px;}
+.featured-quote{padding:20px 16px;}
+.fq-text{font-size:20px;}
+
+/* FAQ */
+.faq-sec{padding:56px 16px;}
+.faq-h{font-size:clamp(28px,8vw,44px);}
+.faq-grid{grid-template-columns:1fr;gap:6px;}
+.fi-q{padding:14px;font-size:12px;}
+.fi-ai{padding:0 12px 12px 34px;font-size:11px;}
+
+/* FIND YOUR HOME */
+.fhcont{padding:56px 16px;}
+.fh-h{font-size:clamp(32px,8vw,52px);letter-spacing:-1.5px;}
+.fh-sub{font-size:13px;}
+.fh-paths{flex-direction:column;max-width:100%;}
+.fhp{border:1px solid var(--ln) !important;border-bottom:none !important;}
+.fhp:last-child{border-bottom:1px solid var(--ln) !important;}
+.fh-fw{padding:18px 16px;}
+.fh-fi{padding:10px 14px;font-size:12px;}
+.fhform{grid-template-columns:1fr;gap:8px;}
+.fh-ctas{flex-direction:column;gap:8px;}
+.fhpri,.fhsec2{width:100%;padding:13px;font-size:9px;}
+.fhci-row{padding:14px;flex-direction:column;align-items:flex-start;gap:8px;}
+.fhci-sep{width:100%;height:1px;background:var(--ln);}
+.fhci-v{font-size:14px;}
+
+/* FOOTER */
+footer{padding:36px 16px 16px;}
+.ft-g{grid-template-columns:1fr 1fr;gap:20px;}
+.ft-g>div:first-child{grid-column:span 2;}
+.ft-bot{flex-direction:column;gap:8px;text-align:center;}
+
+/* ==========================
+   TABLET (640px+)
+   ========================== */
+@media(min-width:640px){
+  #nav{padding:0 28px;height:60px;}
+  .nlinks{display:flex;}
+  .hh1{font-size:clamp(56px,8vw,80px);}
+  .sbar{flex-direction:row;}
+  .sf{border-right:1px solid var(--ln);border-bottom:none;}
+  .sbgo{width:auto;}
+  .hstats{flex-wrap:nowrap;}
+  .inv-grid{grid-template-columns:1fr 1fr;}
+  .ic-img{height:260px;}
+  .udp-spec-row{grid-template-columns:repeat(4,1fr);}
+  .udp-amen-grid{grid-template-columns:repeat(4,1fr);}
+  .udp-loc-info{grid-template-columns:1fr 1fr;}
+  .udp-actions{flex-wrap:nowrap;}
+  .udp-wa,.udp-call,.udp-book,.udp-proj-link{flex:1;}
+  .bk-carousel{position:relative;overflow:hidden;padding:0 0 48px;}
+  .bk-body{left:8%;right:auto;max-width:520px;top:50%;}
+  .bk-btns{flex-direction:row;}
+  .bk-btn-p,.bk-btn-s{width:auto;}
+  .bk-ctrl{left:8%;}
+  .bk-arrows2{right:6%;}
+  .port21-scroll{overflow:hidden;}
+  .port21-track{animation:port21anim 80s linear infinite;padding:0;}
+  .pbc{position:relative;width:360px;height:460px;flex-shrink:0;overflow:hidden;cursor:pointer;border-radius:3px;border:1px solid rgba(255,255,255,.07);transition:border-color .35s,transform .4s,box-shadow .4s;}
+  .pbc-cta{opacity:0;transform:translateY(8px);}
+  .pbc:hover .pbc-cta{opacity:1;transform:translateY(0);}
+  .s0b{grid-template-columns:1fr 1fr;}
+  .s0r{display:grid;}
+  .s2b{grid-template-columns:1fr 1fr;}
+  .bgrid{grid-template-columns:repeat(3,1fr);}
+  .s1-grid,.s2-grid{grid-template-columns:1fr 1fr;}
+  .faq-grid{grid-template-columns:1fr 1fr;}
+  .fh-paths{flex-direction:row;}
+  .fhform{grid-template-columns:1fr 1fr;}
+  .fh-ctas{flex-direction:row;}
+  .fhpri,.fhsec2{width:auto;}
+  .fhci-row{flex-direction:row;align-items:center;}
+  .fhci-sep{width:1px;height:40px;background:rgba(255,255,255,.12);}
+  .ft-g{grid-template-columns:repeat(4,1fr);}
+  .ft-g>div:first-child{grid-column:span 1;}
+  .ft-bot{flex-direction:row;}
+  .booking-label h2{font-size:clamp(38px,5.5vw,64px);}
+  .bk-name{font-size:clamp(44px,6.5vw,76px);}
 }
 
-/* === BOOKING FULLSCREEN CAROUSEL === */
-.booking-sec{background:var(--bg);padding:0;}
-.booking-label{text-align:center;padding:72px 24px 36px;}
-.booking-label h2{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,5vw,64px);font-weight:300;line-height:1;letter-spacing:-1.5px;color:var(--wh);margin:10px 0 12px;}
-.booking-label h2 em{color:var(--g);font-style:italic;}
-.booking-label p{font-size:13px;color:var(--mid);max-width:440px;margin:0 auto;line-height:1.85;}
-.bk-carousel{position:relative;overflow:hidden;height:72vh;min-height:460px;max-height:700px;}
-.bk-slides{display:flex;height:100%;transition:transform .85s cubic-bezier(.77,0,.175,1);}
-.bk-slide-item{width:100%;flex-shrink:0;position:relative;overflow:hidden;}
-.bk-slide-item img{width:100%;height:100%;object-fit:cover;filter:brightness(.45);transition:transform 10s ease;}
-.bk-slide-item.active img{transform:scale(1.07);}
-.bk-veil{position:absolute;inset:0;background:linear-gradient(110deg,rgba(7,8,13,.92) 0%,rgba(7,8,13,.55) 45%,rgba(7,8,13,.08) 100%);}
-.bk-body{position:absolute;top:50%;left:8%;transform:translateY(-50%);max-width:560px;}
-.bk-num{font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:var(--g);margin-bottom:14px;}
-.bk-name{font-family:'Cormorant Garamond',serif;font-size:clamp(42px,6.5vw,80px);font-weight:300;line-height:.88;letter-spacing:-2.5px;color:var(--wh);margin-bottom:12px;}
-.bk-name em{display:block;font-style:italic;font-weight:300;color:var(--gl);}
-.bk-loc{font-size:13px;color:rgba(255,255,255,.5);margin-bottom:18px;}
-.bk-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:24px;}
-.bk-tag{font-size:7px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;background:rgba(201,169,97,.1);color:var(--g);border:1px solid rgba(201,169,97,.22);}
-.bk-btns{display:flex;gap:10px;}
-.bk-btn-p{padding:13px 24px;background:var(--w);color:#07080D;font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border:none;cursor:pointer;transition:background .2s;}
-.bk-btn-p:hover{background:var(--gl);}
-.bk-btn-s{padding:13px 24px;background:transparent;border:1px solid rgba(255,255,255,.28);color:rgba(255,255,255,.8);font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .2s;}
-.bk-btn-s:hover{border-color:var(--g);color:var(--g);}
-.bk-progress-bar{position:absolute;bottom:0;left:0;height:3px;background:var(--g);z-index:5;transition:width .1s linear;}
-.bk-ctrl{position:absolute;bottom:28px;left:8%;display:flex;align-items:center;gap:16px;z-index:5;}
-.bk-ctr-txt{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;color:rgba(255,255,255,.3);}
-.bk-ctr-txt strong{color:rgba(255,255,255,.7);font-weight:300;}
-.bk-dots2{display:flex;gap:7px;}
-.bk-d2{width:24px;height:2px;background:rgba(255,255,255,.18);cursor:pointer;transition:all .3s;border-radius:1px;}
-.bk-d2.on{background:var(--g);width:42px;}
-.bk-arrows2{position:absolute;bottom:20px;right:6%;display:flex;gap:8px;z-index:5;}
-.bk-arr2{width:46px;height:46px;border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;cursor:pointer;color:rgba(255,255,255,.55);font-size:20px;transition:all .2s;background:rgba(7,8,13,.35);backdrop-filter:blur(8px);}
-.bk-arr2:hover{border-color:var(--g);color:var(--g);}
-/* === PORTFOLIO BIG SCROLLER === */
-.port21-sec{background:var(--c2);padding:80px 0;}
-.port21-head{text-align:center;padding:0 56px 44px;}
-.port21-head h2{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,5vw,60px);font-weight:300;line-height:1;letter-spacing:-1.5px;color:var(--wh);margin:10px 0 12px;}
-.port21-head h2 em{color:var(--g);font-style:italic;}
-.port21-head p{font-size:13px;color:var(--mid);max-width:440px;margin:0 auto;line-height:1.85;}
-.port21-scroll{position:relative;overflow:hidden;padding:4px 0;}
-.port21-scroll::before,.port21-scroll::after{content:'';position:absolute;top:0;bottom:0;width:120px;z-index:3;pointer-events:none;}
-.port21-scroll::before{left:0;background:linear-gradient(to right,var(--c2),transparent);}
-.port21-scroll::after{right:0;background:linear-gradient(to left,var(--c2),transparent);}
-.port21-track{display:flex;gap:18px;width:max-content;animation:port21anim 65s linear infinite;}
-.port21-track:hover{animation-play-state:paused;}
-@keyframes port21anim{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-.pbc{position:relative;width:320px;height:400px;flex-shrink:0;overflow:hidden;cursor:pointer;border-radius:2px;border:1px solid rgba(255,255,255,.06);transition:border-color .35s,transform .4s,box-shadow .4s;}
-.pbc:hover{border-color:rgba(201,169,97,.35);transform:translateY(-8px);box-shadow:0 24px 60px rgba(0,0,0,.5);}
-.pbc img{width:100%;height:100%;object-fit:cover;filter:brightness(.48);transition:filter .6s,transform .7s;display:block;}
-.pbc:hover img{filter:brightness(.36);transform:scale(1.05);}
-.pbc-veil{position:absolute;inset:0;background:linear-gradient(to top,rgba(7,8,13,.96) 0%,rgba(7,8,13,.08) 60%);}
-.pbc-badge{position:absolute;top:14px;left:14px;padding:5px 12px;font-family:'Montserrat',sans-serif;font-size:7px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border-radius:1px;z-index:2;}
-.pbc-badge.bk{background:rgba(201,169,97,.95);color:#07080D;}
-.pbc-badge.dv{background:rgba(34,197,94,.88);color:#07080D;}
-.pbc-yr{position:absolute;top:14px;right:16px;font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:rgba(255,255,255,.1);z-index:2;}
-.pbc-body{position:absolute;bottom:0;left:0;right:0;padding:22px 20px;}
-.pbc-tag{font-family:'Montserrat',sans-serif;font-size:7px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--g);margin-bottom:8px;}
-.pbc-name{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;color:var(--wh);line-height:1.1;margin-bottom:12px;}
-.pbc-cta{padding:9px 15px;background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.65);font-family:'Montserrat',sans-serif;font-size:7px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .28s;opacity:0;transform:translateY(8px);}
-.pbc:hover .pbc-cta{opacity:1;transform:translateY(0);background:rgba(201,169,97,.1);border-color:var(--g);color:var(--g);}
-/* Mobile */
-@media(max-width:768px){
-  .bk-body{left:5%;right:5%;max-width:none;}
-  .bk-name{font-size:clamp(36px,8vw,58px);}
-  .bk-btns{flex-direction:column;gap:8px;}
-  .bk-btn-p,.bk-btn-s{width:100%;text-align:center;}
-  .bk-ctrl{left:5%;}
-  .bk-arrows2{right:5%;}
-  .port21-head{padding:0 24px 36px;}
-  .pbc{width:260px;height:320px;}
+/* DESKTOP (1024px+) */
+@media(min-width:1024px){
+  .inv-grid{grid-template-columns:repeat(3,1fr);gap:20px;}
+  .bk-carousel{position:relative;overflow:hidden;padding:0 0 48px;}
+  .pbc{position:relative;width:360px;height:460px;flex-shrink:0;overflow:hidden;cursor:pointer;border-radius:3px;border:1px solid rgba(255,255,255,.07);transition:border-color .35s,transform .4s,box-shadow .4s;}
 }
-@media(max-width:480px){
-  .bk-carousel{height:85vh;min-height:520px;}
-  .booking-label{padding:52px 16px 28px;}
-  .pbc{width:220px;height:280px;}
+@media(min-width:1280px){
+  .inv-grid{grid-template-columns:repeat(3,1fr);gap:20px;}
+}
+
+
+@media(max-width:639px){
+  .bk-slide-item{flex:0 0 calc(100% - 8px);}
+  .bk-carousel{padding-bottom:40px;}
+  .port21-head{padding:0 16px 32px;}
+  .pbc{width:240px;height:320px;}
   .pbc-name{font-size:20px;}
-  .port21-sec{padding:60px 0;}
+  .inv-grid{grid-template-columns:1fr !important;}
+  .ic-img{height:200px !important;}
+  section[id="inventory"]{padding:60px 0 !important;}
+  section[id="inventory"]>div{padding:0 16px !important;}
 }
+@media(min-width:640px) and (max-width:1023px){
+  .bk-slide-item{flex:0 0 calc(50% - 8px);}
+  .inv-grid{grid-template-columns:1fr 1fr !important;}
+  section[id="inventory"]>div{padding:0 28px !important;}
+}
+
+/* ── ONGOING BOOKINGS — 2-up slide carousel ─────────────────── */
+.bks-sec{background:var(--bg);}
+.bks-label{text-align:center;padding:80px 24px 40px;}
+.bks-label .inv-head .stag{display:flex;justify-content:center;}
+.stag{justify-content:center;display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.bks-label h2{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5.5vw,68px);font-weight:300;line-height:.92;letter-spacing:-2px;color:var(--wh);}
+.bks-label h2 em{color:var(--g);font-style:italic;}
+.bks-label p{font-size:13px;color:var(--mid);max-width:420px;margin:14px auto 0;line-height:1.85;}
+.bks-viewport{overflow:hidden;position:relative;padding:0 56px 56px;max-width:1400px;margin:0 auto;}
+.bks-track{display:flex;gap:16px;transition:transform .75s cubic-bezier(.77,0,.175,1);}
+.bks-item{flex:0 0 calc(50% - 8px);position:relative;border-radius:3px;overflow:hidden;aspect-ratio:3/4;cursor:pointer;min-height:460px;}
+.bks-item img{width:100%;height:100%;object-fit:cover;filter:brightness(.42);transition:filter .5s,transform 9s ease;display:block;}
+.bks-item:hover img,.bks-item.act img{filter:brightness(.35);transform:scale(1.05);}
+.bks-veil{position:absolute;inset:0;background:linear-gradient(115deg,rgba(7,8,13,.95) 0%,rgba(7,8,13,.55) 50%,rgba(7,8,13,.08) 100%);}
+.bks-body{position:absolute;bottom:0;left:0;right:0;padding:28px 26px;}
+.bks-n{font-family:'Montserrat',sans-serif;font-size:8px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--g);margin-bottom:12px;}
+.bks-title{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,3.5vw,52px);font-weight:300;line-height:.88;letter-spacing:-1.5px;color:var(--wh);margin-bottom:10px;}
+.bks-title em{display:block;font-style:italic;font-weight:300;color:var(--gl);}
+.bks-loc{font-size:12px;color:rgba(255,255,255,.45);margin-bottom:14px;}
+.bks-tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:18px;}
+.bks-tag{font-size:7px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;background:rgba(201,169,97,.1);color:var(--g);border:1px solid rgba(201,169,97,.2);}
+.bks-btns{display:flex;gap:8px;opacity:0;transform:translateY(6px);transition:all .3s;}
+.bks-item:hover .bks-btns{opacity:1;transform:translateY(0);}
+.bks-bp{padding:11px 20px;background:var(--w);color:#07080D;font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border:none;cursor:pointer;transition:background .2s;}
+.bks-bp:hover{background:var(--gl);}
+.bks-bs{padding:11px 20px;background:transparent;border:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.75);font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .2s;}
+.bks-bs:hover{border-color:var(--g);color:var(--g);}
+.bks-ctrl{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:24px;}
+.bks-dot{width:28px;height:2px;background:rgba(255,255,255,.18);cursor:pointer;transition:all .3s;border-radius:1px;}
+.bks-dot.on{background:var(--g);width:44px;}
+.bks-arr{width:44px;height:44px;border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;cursor:pointer;color:rgba(255,255,255,.5);font-size:20px;transition:all .2s;background:rgba(7,8,13,.3);}
+.bks-arr:hover{border-color:var(--g);color:var(--g);}
+.bks-pgbar{position:absolute;bottom:56px;left:56px;right:56px;height:2px;background:rgba(255,255,255,.08);border-radius:1px;}
+.bks-pgfill{height:100%;background:var(--g);width:0%;transition:width .08s linear;border-radius:1px;}
+/* ── PORTFOLIO 21 — bigger, centered ────────────────────────── */
+.p21-sec{background:var(--c2);padding:90px 0;}
+.p21-head{text-align:center;max-width:680px;margin:0 auto;padding:0 24px 52px;}
+.p21-head .stag{justify-content:center;display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.p21-head h2{font-family:'Cormorant Garamond',serif;font-size:clamp(42px,6vw,72px);font-weight:300;line-height:.9;letter-spacing:-2.5px;color:var(--wh);}
+.p21-head h2 em{color:var(--g);font-style:italic;}
+.p21-head p{font-size:13px;color:var(--mid);max-width:400px;margin:14px auto 0;line-height:1.85;}
+.p21-scroll{position:relative;overflow:hidden;padding:4px 0;}
+.p21-scroll::before,.p21-scroll::after{content:'';position:absolute;top:0;bottom:0;width:140px;z-index:3;pointer-events:none;}
+.p21-scroll::before{left:0;background:linear-gradient(to right,var(--c2),transparent);}
+.p21-scroll::after{right:0;background:linear-gradient(to left,var(--c2),transparent);}
+.p21-track{display:flex;gap:20px;width:max-content;animation:p21run 80s linear infinite;}
+.p21-track:hover{animation-play-state:paused;}
+@keyframes p21run{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.pbc2{position:relative;width:360px;height:460px;flex-shrink:0;overflow:hidden;cursor:pointer;border-radius:3px;border:1px solid rgba(255,255,255,.07);transition:border-color .35s,transform .45s,box-shadow .45s;}
+.pbc2:hover{border-color:rgba(201,169,97,.4);transform:translateY(-10px);box-shadow:0 28px 64px rgba(0,0,0,.55);}
+.pbc2 img{width:100%;height:100%;object-fit:cover;filter:brightness(.46);transition:filter .6s,transform .8s;display:block;}
+.pbc2:hover img{filter:brightness(.33);transform:scale(1.06);}
+.pbc2-veil{position:absolute;inset:0;background:linear-gradient(to top,rgba(7,8,13,.97) 0%,rgba(7,8,13,.06) 60%);}
+.pbc2-badge{position:absolute;top:16px;left:16px;padding:6px 14px;font-family:'Montserrat',sans-serif;font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border-radius:2px;z-index:2;}
+.pbc2-badge.bk{background:rgba(201,169,97,.95);color:#07080D;}
+.pbc2-badge.dv{background:rgba(34,197,94,.9);color:#07080D;}
+.pbc2-yr{position:absolute;top:16px;right:18px;font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;color:rgba(255,255,255,.1);z-index:2;}
+.pbc2-body{position:absolute;bottom:0;left:0;right:0;padding:24px 22px;}
+.pbc2-tag{font-family:'Montserrat',sans-serif;font-size:7px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--g);margin-bottom:10px;}
+.pbc2-name{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--wh);line-height:1.05;margin-bottom:14px;}
+.pbc2-cta{padding:9px 16px;background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.6);font-family:'Montserrat',sans-serif;font-size:7px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .28s;opacity:0;transform:translateY(8px);}
+.pbc2:hover .pbc2-cta{opacity:1;transform:translateY(0);background:rgba(201,169,97,.12);border-color:var(--g);color:var(--g);}
+/* Mobile responsive for new sections */
+@media(max-width:639px){
+  .bks-label{padding:56px 16px 28px;}
+  .bks-viewport{padding:0 16px 48px;}
+  .bks-item{flex:0 0 calc(100% - 0px);min-height:380px;}
+  .bks-item .bks-btns{opacity:1;transform:translateY(0);}
+  .bks-pgbar{left:16px;right:16px;}
+  .p21-sec{padding:60px 0;}
+  .p21-head{padding:0 16px 36px;}
+  .p21-head h2{font-size:clamp(34px,9vw,52px);}
+  .p21-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .p21-track{animation:none;padding:0 16px;}
+  .pbc2{width:240px;height:320px;}
+  .pbc2-name{font-size:20px;}
+  .pbc2-cta{opacity:1;transform:translateY(0);background:rgba(201,169,97,.08);border-color:rgba(201,169,97,.25);color:rgba(201,169,97,.7);}
+}
+@media(min-width:640px) and (max-width:1023px){
+  .bks-viewport{padding:0 24px 48px;}
+  .bks-pgbar{left:24px;right:24px;}
+  .pbc2{width:280px;height:360px;}
+}
+
+
+/* ── BOOKING 2-UP SLIDER ─────────────────────────────────── */
+.bks-sec{background:var(--bg);padding:0 0 60px;}
+.bks-label{text-align:center;padding:80px 24px 44px;}
+.bks-label h2{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5.5vw,68px);
+  font-weight:300;line-height:.92;letter-spacing:-2px;color:var(--wh);}
+.bks-label h2 em{color:var(--g);font-style:italic;}
+.bks-label p{font-size:13px;color:var(--mid);max-width:400px;margin:12px auto 0;line-height:1.85;}
+.bks-wrap{position:relative;display:flex;align-items:center;gap:0;max-width:1360px;margin:0 auto;padding:0 56px;}
+.bks-arr{width:48px;height:48px;flex-shrink:0;border:1px solid rgba(255,255,255,.18);
+  background:rgba(7,8,13,.4);color:rgba(255,255,255,.6);font-size:22px;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  transition:all .2s;border-radius:2px;z-index:5;}
+.bks-arr:hover{border-color:var(--g);color:var(--g);}
+.bks-arr-l{margin-right:14px;}
+.bks-arr-r{margin-left:14px;}
+.bks-viewport{overflow:hidden;flex:1;}
+.bks-track{display:flex;gap:16px;transition:transform .75s cubic-bezier(.77,0,.175,1);}
+.bks-card{flex:0 0 calc(50% - 8px);position:relative;border-radius:3px;overflow:hidden;
+  aspect-ratio:2/3;cursor:pointer;border:1px solid rgba(255,255,255,.07);
+  transition:border-color .3s;}
+.bks-card:hover{border-color:rgba(201,169,97,.3);}
+.bks-card img{width:100%;height:100%;object-fit:cover;filter:brightness(.42);
+  transition:filter .5s,transform 9s ease;display:block;}
+.bks-card:hover img{filter:brightness(.33);transform:scale(1.04);}
+.bks-veil{position:absolute;inset:0;
+  background:linear-gradient(115deg,rgba(7,8,13,.94) 0%,rgba(7,8,13,.5) 50%,rgba(7,8,13,.05) 100%);}
+.bks-body{position:absolute;bottom:0;left:0;right:0;padding:28px 26px;}
+.bks-n{font-family:'Montserrat',sans-serif;font-size:8px;font-weight:700;
+  letter-spacing:5px;text-transform:uppercase;color:var(--g);margin-bottom:12px;}
+.bks-title{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,3vw,50px);
+  font-weight:300;line-height:.88;letter-spacing:-1.5px;color:var(--wh);margin-bottom:10px;}
+.bks-title em{display:block;font-style:italic;color:var(--gl);}
+.bks-loc{font-size:11px;color:rgba(255,255,255,.45);margin-bottom:18px;line-height:1.6;}
+.bks-btns{display:flex;gap:8px;opacity:0;transform:translateY(6px);transition:all .3s;}
+.bks-card:hover .bks-btns{opacity:1;transform:translateY(0);}
+.bks-bp{padding:10px 18px;background:var(--w);color:#07080D;font-family:'Montserrat',sans-serif;
+  font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border:none;cursor:pointer;}
+.bks-bp:hover{background:var(--gl);}
+.bks-bs{padding:10px 18px;background:transparent;border:1px solid rgba(255,255,255,.25);
+  color:rgba(255,255,255,.75);font-family:'Montserrat',sans-serif;font-size:9px;
+  font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .2s;}
+.bks-bs:hover{border-color:var(--g);color:var(--g);}
+.bks-ctrl{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:24px;}
+.bks-dot{width:28px;height:2px;background:rgba(255,255,255,.18);cursor:pointer;
+  transition:all .3s;border-radius:1px;}
+.bks-dot.on{background:var(--g);width:44px;}
+
+/* ── WLV SECTION ─────────────────────────────────────────── */
+.wlv-sec{background:var(--c2);position:relative;overflow:hidden;}
+.wlv-inner{position:relative;min-height:560px;}
+.wlv-slide{position:absolute;inset:0;opacity:0;pointer-events:none;
+  transition:opacity .7s ease;padding:80px 56px;}
+.wlv-slide.active{opacity:1;pointer-events:all;position:relative;}
+.wlv-slide-in{max-width:1200px;margin:0 auto;}
+.wlv-h{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,62px);
+  font-weight:300;line-height:.92;letter-spacing:-2px;color:var(--wh);margin:0 0 14px;}
+.wlv-h em{color:var(--g);font-style:italic;}
+.wlv-sub{font-size:13px;color:var(--mid);max-width:440px;line-height:1.85;margin-bottom:44px;}
+/* Slide 1 stats */
+.wlv-s1-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-bottom:40px;}
+.wlv-stat{background:rgba(255,255,255,.03);border:1px solid var(--ln);padding:28px 24px;}
+.wlv-sn{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,54px);
+  font-weight:300;color:var(--g);line-height:1;margin-bottom:8px;}
+.wlv-sl{font-size:11px;color:var(--mid);line-height:1.6;}
+/* Three generations */
+.wlv-gen-label{font-family:'Montserrat',sans-serif;font-size:8px;font-weight:700;
+  letter-spacing:4px;text-transform:uppercase;color:var(--dim);margin-bottom:16px;}
+.wlv-gen-row{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:start;gap:0;}
+.wlv-gen-item{background:rgba(255,255,255,.02);border:1px solid var(--ln);padding:20px;}
+.wlv-gen-div{width:1px;background:linear-gradient(to bottom,transparent,var(--ln),transparent);
+  margin:20px 0;}
+.wlv-gy{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;
+  color:var(--g);margin-bottom:6px;}
+.wlv-gi{font-size:11px;color:var(--mid);line-height:1.6;}
+/* Slide 2 pillars */
+.wlv-pillars{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-bottom:32px;}
+.wlv-pil{display:flex;gap:18px;align-items:flex-start;background:rgba(255,255,255,.02);
+  border:1px solid var(--ln);padding:22px 20px;}
+.wlv-pi{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;
+  color:rgba(201,169,97,.25);line-height:1;flex-shrink:0;width:40px;}
+.wlv-pt{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;
+  letter-spacing:1px;text-transform:uppercase;color:var(--wh);margin-bottom:8px;}
+.wlv-pd{font-size:12px;color:var(--mid);line-height:1.7;}
+/* Voices */
+.wlv-voices{display:grid;grid-template-columns:1fr 1fr;gap:2px;}
+.wlv-voice{display:flex;gap:14px;align-items:flex-start;
+  background:rgba(255,255,255,.02);border:1px solid var(--ln);padding:20px;}
+.wlv-vav{width:38px;height:38px;background:var(--g);color:#07080D;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;
+  font-size:10px;font-weight:700;flex-shrink:0;}
+.wlv-vq{font-size:12px;color:rgba(255,255,255,.65);line-height:1.7;
+  font-style:italic;margin-bottom:8px;}
+.wlv-vn{font-family:'Montserrat',sans-serif;font-size:8px;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;color:var(--g);}
+/* WLV nav */
+.wlv-nav-row{display:flex;align-items:center;justify-content:center;gap:10px;
+  padding:24px 0 40px;}
+.wlv-arr{width:42px;height:42px;border:1px solid rgba(255,255,255,.18);
+  background:none;color:rgba(255,255,255,.5);font-size:20px;display:flex;
+  align-items:center;justify-content:center;cursor:pointer;transition:all .2s;}
+.wlv-arr:hover{border-color:var(--g);color:var(--g);}
+.wlv-dot{width:28px;height:2px;background:rgba(255,255,255,.18);
+  cursor:pointer;transition:all .3s;border-radius:1px;}
+.wlv-dot.on{background:var(--g);width:44px;}
+
+/* Mobile overrides for new sections */
+@media(max-width:767px){
+  .bks-wrap{padding:0 10px;gap:0;}
+  .bks-arr{display:none;}
+  .bks-card{flex:0 0 calc(100% - 0px);}
+  .bks-card .bks-btns{opacity:1;transform:translateY(0);}
+  .bks-label{padding:52px 16px 28px;}
+  .wlv-slide{padding:56px 16px;}
+  .wlv-s1-grid{grid-template-columns:1fr 1fr;gap:4px;}
+  .wlv-gen-row{grid-template-columns:1fr;gap:4px;}
+  .wlv-gen-div{display:none;}
+  .wlv-pillars{grid-template-columns:1fr;gap:4px;}
+  .wlv-voices{grid-template-columns:1fr;gap:4px;}
+}
+@media(min-width:768px) and (max-width:1023px){
+  .bks-wrap{padding:0 24px;}
+  .wlv-s1-grid{grid-template-columns:1fr 1fr;}
+  .wlv-pillars{grid-template-columns:1fr 1fr;}
+  .wlv-voices{grid-template-columns:1fr 1fr;}
+}
+
 </style>
 <style>
 :root{--bg:#07080D;--c2:#0C0E15;--c3:#13151F;--g:#C9A961;--gl:#EEE1BF;--w:#EEE9E2;--wh:#FFFFFF;--dim:#525868;--mid:#8D95A3;--ln:rgba(201,169,97,.1);}
@@ -261,12 +614,12 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--w);overfl
 .tslogo{display:flex;align-items:center;padding:0 24px;height:100%;border-right:1px solid var(--ln);flex-shrink:0;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.18);transition:color .3s;}.tslogo:hover{color:rgba(201,169,97,.5);}.tslogo.sc{font-family:'Cormorant Garamond',serif;font-size:14px;letter-spacing:2px;font-style:italic;}
 @keyframes ts{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 /* SECTION BASE */
-.sec{padding:96px 56px;}.sec.d2{background:var(--c2);}.sec.d3{background:var(--c3);}
+.sec{padding:96px 56px;max-width:1360px;margin:0 auto;}.sec.d2{background:var(--c2);}.sec.d3{background:var(--c3);}
 .stag{font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--g);display:flex;align-items:center;gap:10px;margin-bottom:12px;}.stag::before{content:'';width:22px;height:1px;background:var(--g);}
 .sh{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4.2vw,58px);font-weight:300;line-height:1.05;letter-spacing:-1px;color:var(--wh);}.sh em{color:var(--g);font-style:italic;}
 .slead{font-size:13px;color:var(--mid);line-height:1.9;max-width:500px;}
 /* INVENTORY */
-.inv-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:36px;flex-wrap:wrap;gap:16px;}
+.inv-head{display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px;margin-bottom:40px;}
 .inv-filters{display:flex;gap:2px;flex-wrap:wrap;}
 .ift{padding:9px 16px;font-family:'Montserrat',sans-serif;font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:var(--c3);color:var(--dim);border:1px solid var(--ln);cursor:pointer;transition:all .2s;}.ift.on{background:var(--g);color:#07080D;border-color:var(--g);}
 .inv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
@@ -551,44 +904,6 @@ footer{background:#030407;padding:42px 56px 18px;border-top:1px solid var(--ln);
 .reveal{opacity:1;transform:none;}
 .pil{opacity:1;transform:none;transition:border-color .3s;}
 .vs{opacity:1;transform:none;transition:border-color .3s;}
-/* RESPONSIVE */
-@media(max-width:1024px){
-  #nav,.sec,.wlv-slide,.faq-sec,.fhcont,.fhci-row,footer{padding-left:24px;padding-right:24px;}
-  .nlinks{display:none;}.inv-grid,.port-top,.s1-grid,.s2-grid,.bgrid,.s0b,.s2b,.faq-grid,.ft-g{grid-template-columns:1fr;}
-  .past-strip{grid-template-columns:repeat(2,1fr);}.wlv-arrows{right:24px;}
-}
-@media(max-width:640px){
-  .hh1{font-size:52px;letter-spacing:-2px;}.hstats{flex-wrap:wrap;justify-content:center;}
-  .hst{padding:6px 14px;}.inv-grid,.fhform,.past-strip{grid-template-columns:1fr;}
-  .udp-amen-grid{grid-template-columns:repeat(2,1fr);}.udp-spec-row{grid-template-columns:repeat(2,1fr);}
-  .fh-ctas{flex-direction:column;}.udp-actions{flex-direction:column;}
-}
-
-/* STRESS TEST FIXES */
-#gal-slides{position:absolute;inset:0;overflow:hidden;}
-.gal-slide{position:absolute;inset:0;opacity:0;transition:opacity .6s ease;z-index:1;}
-.gal-slide.on{opacity:1;z-index:2;}
-.gal-arr{z-index:5;}
-.gal-dots{z-index:5;}
-/* VS transition delays */
-.vs:nth-child(1){transition-delay:.06s;}
-.vs:nth-child(2){transition-delay:.18s;}
-/* Scroller pause on hover */
-.port-scroller:hover .port-track{animation-play-state:paused;}
-/* Popup sizing on mobile */
-@media(max-width:768px){
-  .udp-wrap{flex-direction:column;max-height:95vh;}
-  .udp-actions{flex-wrap:wrap;}
-  .udp-wa,.udp-call,.udp-book,.udp-proj-link{flex:1 1 50%;border:1px solid var(--ln);}
-  .udp-amen-grid{grid-template-columns:repeat(2,1fr);}
-  .udp-spec-row{grid-template-columns:repeat(2,1fr);}
-  .udp-loc-info{grid-template-columns:1fr;}
-  .wlv-slide{padding:60px 24px;}
-  .s1-grid,.s2-grid{grid-template-columns:1fr;}
-  .gen-row{flex-direction:column;}
-  .port-scroller{height:220px;}
-  .port-mini{width:220px;height:220px;}
-}
 </style>
 </head>
 <body>
@@ -620,8 +935,8 @@ footer{background:#030407;padding:42px 56px 18px;border-top:1px solid var(--ln);
 <!-- HERO -->
 <section class="hero">
   <div class="hvids">
-    <div class="hvid on" id="hv0"><video autoplay muted loop playsinline preload="metadata" poster="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_f2d017dc-f7b1-44ab-b762-2c2b5e54f4b6.png"><source src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_021405_571121ed-0f1d-42f9-a337-eeb15621c4d5.mp4" type="video/mp4"></video></div>
-    <div class="hvid" id="hv1"><video id="hv1vid" muted loop playsinline preload="none"><source data-src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_021433_c7184ffb-6704-41bf-aea4-e7ad58355f86.mp4" src="" type="video/mp4"></video></div>
+    <div class="hvid on" id="hv0"><video autoplay muted loop playsinline preload="metadata" poster="assets/img/cdc1.jpg"><source src="assets/vid/tw.mp4" type="video/mp4"></video></div>
+    <div class="hvid" id="hv1"><video id="hv1vid" muted loop playsinline preload="none"><source data-src="assets/vid/in.mp4" src="" type="video/mp4"></video></div>
   </div>
   <div class="hveil"></div>
   <div class="hbody" style="padding-top:68px;">
@@ -654,14 +969,13 @@ footer{background:#030407;padding:42px 56px 18px;border-top:1px solid var(--ln);
 </div></div>
 
 <!-- INVENTORY -->
-<section class="sec d2" id="inventory">
-  <div class="inv-head reveal">
-    <div>
-      <div class="stag">Available Inventory</div>
-      <h2 class="sh">Every unit type.<br><em>Every project. One place.</em></h2>
-      <p class="slead" style="margin-top:10px;">Click any unit for full details — gallery, floor plan, amenities, location. Book directly from the popup.</p>
+<section class="sec d2" id="inventory" style="padding:96px 0;"><div style="max-width:1360px;margin:0 auto;padding:0 56px;"><div class="inv-head reveal">
+    <div style="text-align:center;width:100%;">
+      <div class="stag" style="justify-content:center;display:flex;align-items:center;gap:8px;">Available Inventory</div>
+      <h2 class="sh" style="font-size:clamp(36px,5vw,62px);text-align:center;">Every unit type.<br><em>Every project. One place.</em></h2>
+      <p class="slead" style="margin-top:10px;text-align:center;max-width:560px;margin-left:auto;margin-right:auto;">Click any unit for full details — gallery, floor plan, amenities, location. Book directly from the popup.</p>
     </div>
-    <div class="inv-filters">
+    <div class="inv-filters" style="justify-content:center;">
       <button class="ift on" onclick="fInv('all',this)">All</button>
       <button class="ift" onclick="fInv('apt',this)">Apartments</button>
       <button class="ift" onclick="fInv('vil',this)">Villas</button>
@@ -669,11 +983,11 @@ footer{background:#030407;padding:42px 56px 18px;border-top:1px solid var(--ln);
       <button class="ift" onclick="fInv('com',this)">Commercial</button>
     </div>
   </div>
-  <div class="inv-grid reveal" id="invGrid">
+  <div class="inv-grid reveal" id="invGrid" style="margin:0 auto;max-width:1200px;">
 
     <!-- PEARL TOWER × 2 unit types -->
     <div class="icard" data-t="apt" onclick="openUD('pearl','Studio')">
-      <div class="ic-img"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_641d3176-ef70-4ca9-be99-20394c105c5f.png" alt="Pearl Tower" loading="lazy"><span class="ic-badge ba">Apartment</span><div class="ic-proj">Pearl Tower · Lahore</div></div>
+      <div class="ic-img"><img src="assets/img/pt1.jpg" alt="Pearl Tower" loading="lazy"><span class="ic-badge ba">Apartment</span><div class="ic-proj">Pearl Tower · Lahore</div></div>
       <div class="ic-body">
         <div class="ic-type">Studio Residence</div>
         <div class="ic-loc">📍 Pearl Tower · Premium high-rise</div>
@@ -684,7 +998,7 @@ footer{background:#030407;padding:42px 56px 18px;border-top:1px solid var(--ln);
     </div>
 
     <div class="icard" data-t="apt" onclick="openUD('pearl','2 Bedroom')">
-      <div class="ic-img"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170258_2e5a5d78-c17d-4a4f-84a3-72f2e807e5be.png" alt="Pearl Tower" loading="lazy"><span class="ic-badge ba">Apartment</span><div class="ic-proj">Pearl Tower · Premium Floor</div></div>
+      <div class="ic-img"><img src="assets/img/pt2.jpg" alt="Pearl Tower" loading="lazy"><span class="ic-badge ba">Apartment</span><div class="ic-proj">Pearl Tower · Premium Floor</div></div>
       <div class="ic-body">
         <div class="ic-type">2 Bedroom Apartment</div>
         <div class="ic-loc">📍 Pearl Tower · City views</div>
@@ -696,7 +1010,7 @@ footer{background:#030407;padding:42px 56px 18px;border-top:1px solid var(--ln);
 
     <!-- CDC RESIDENCIA × 2 unit types -->
     <div class="icard" data-t="apt" onclick="openUD('cdc','1 Bedroom')">
-      <div class="ic-img"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_f2d017dc-f7b1-44ab-b762-2c2b5e54f4b6.png" alt="CDC Residencia" loading="lazy"><span class="ic-badge ba">Apartment</span><div class="ic-proj">CDC Residencia · Askari 11</div></div>
+      <div class="ic-img"><img src="assets/img/cdc1.jpg" alt="CDC Residencia" loading="lazy"><span class="ic-badge ba">Apartment</span><div class="ic-proj">CDC Residencia · Askari 11</div></div>
       <div class="ic-body">
         <div class="ic-type">1 Bedroom Apartment</div>
         <div class="ic-loc">📍 CDC Residencia · Askari 11, Lahore</div>
@@ -707,7 +1021,7 @@ footer{background:#030407;padding:42px 56px 18px;border-top:1px solid var(--ln);
     </div>
 
     <div class="icard" data-t="apt" onclick="openUD('cdc','2 Bedroom')">
-      <div class="ic-img"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015924_67d9aaac-9468-43e2-a713-c8eb061a8c89.png" alt="CDC Residencia" loading="lazy"><span class="ic-badge ba">Apartment</span><div class="ic-proj">CDC Residencia · Premium</div></div>
+      <div class="ic-img"><img src="assets/img/int1.jpg" alt="CDC Residencia" loading="lazy"><span class="ic-badge ba">Apartment</span><div class="ic-proj">CDC Residencia · Premium</div></div>
       <div class="ic-body">
         <div class="ic-type">2 Bedroom Premium</div>
         <div class="ic-loc">📍 CDC Residencia · Top Floors</div>
@@ -719,7 +1033,7 @@ footer{background:#030407;padding:42px 56px 18px;border-top:1px solid var(--ln);
 
     <!-- CLASSIC HOMES × 2 unit types -->
     <div class="icard" data-t="vil" onclick="openUD('classic','5 Marla')">
-      <div class="ic-img"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015910_fe27a9fd-0a98-4ae7-a13c-68979dc237cb.png" alt="Classic Homes" loading="lazy"><span class="ic-badge bv">Villa</span><div class="ic-proj">Classic Homes · State Life</div></div>
+      <div class="ic-img"><img src="assets/img/ch1.jpg" alt="Classic Homes" loading="lazy"><span class="ic-badge bv">Villa</span><div class="ic-proj">Classic Homes · State Life</div></div>
       <div class="ic-body">
         <div class="ic-type">5 Marla Classic Home</div>
         <div class="ic-loc">📍 State Life · Near Lake City</div>
@@ -730,7 +1044,7 @@ footer{background:#030407;padding:42px 56px 18px;border-top:1px solid var(--ln);
     </div>
 
     <div class="icard" data-t="vil" onclick="openUD('classic','10 Marla')">
-      <div class="ic-img"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015910_7f614c6b-727a-43f6-bc52-3523b53e1c39.png" alt="Classic Homes" loading="lazy"><span class="ic-badge bv">Villa</span><div class="ic-proj">Classic Homes · Premium</div></div>
+      <div class="ic-img"><img src="assets/img/ch2.jpg" alt="Classic Homes" loading="lazy"><span class="ic-badge bv">Villa</span><div class="ic-proj">Classic Homes · Premium</div></div>
       <div class="ic-body">
         <div class="ic-type">10 Marla Premium Home</div>
         <div class="ic-loc">📍 State Life · Premium Block</div>
@@ -742,7 +1056,7 @@ footer{background:#030407;padding:42px 56px 18px;border-top:1px solid var(--ln);
 
     <!-- AL WAJAF APARTMENTS × 3 unit types -->
     <div class="icard" data-t="apt" onclick="openUD('wajaf','1 Bedroom')">
-      <div class="ic-img"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015924_144ddfe0-4f22-4c4f-971c-c97f8e4b1236.png" alt="Al Wajaf" loading="lazy"><span class="ic-badge ba">Apartment</span><div class="ic-proj">Al Wajaf · State Life Phase 1</div></div>
+      <div class="ic-img"><img src="assets/img/aw2.jpg" alt="Al Wajaf" loading="lazy"><span class="ic-badge ba">Apartment</span><div class="ic-proj">Al Wajaf · State Life Phase 1</div></div>
       <div class="ic-body">
         <div class="ic-type">1 Bedroom Condo</div>
         <div class="ic-loc">📍 Kamahan-Lidher Road · 4.6★</div>
@@ -753,7 +1067,7 @@ footer{background:#030407;padding:42px 56px 18px;border-top:1px solid var(--ln);
     </div>
 
     <div class="icard" data-t="apt" onclick="openUD('wajaf','2 Bedroom')">
-      <div class="ic-img"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170304_082cb7f2-c9bf-4047-ae69-e56e96a82f28.png" alt="Al Wajaf" loading="lazy"><span class="ic-badge ba">Apartment</span><div class="ic-proj">Al Wajaf · Premium Floor</div></div>
+      <div class="ic-img"><img src="assets/img/aw1.jpg" alt="Al Wajaf" loading="lazy"><span class="ic-badge ba">Apartment</span><div class="ic-proj">Al Wajaf · Premium Floor</div></div>
       <div class="ic-body">
         <div class="ic-type">2 Bedroom Premium</div>
         <div class="ic-loc">📍 Al Wajaf · Top Floor Views</div>
@@ -764,7 +1078,7 @@ footer{background:#030407;padding:42px 56px 18px;border-top:1px solid var(--ln);
     </div>
 
     <div class="icard" data-t="com" onclick="openUD('wajaf','Commercial')">
-      <div class="ic-img"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015943_21c722b2-6395-4f00-9f42-74b70105e1f3.png" alt="Al Wajaf" loading="lazy"><span class="ic-badge bc">Commercial</span><div class="ic-proj">Al Wajaf · Ground Floor</div></div>
+      <div class="ic-img"><img src="assets/img/aw3.jpg" alt="Al Wajaf" loading="lazy"><span class="ic-badge bc">Commercial</span><div class="ic-proj">Al Wajaf · Ground Floor</div></div>
       <div class="ic-body">
         <div class="ic-type">Commercial Shop</div>
         <div class="ic-loc">📍 Al Wajaf · Main Frontage</div>
@@ -861,367 +1175,220 @@ footer{background:#030407;padding:42px 56px 18px;border-top:1px solid var(--ln);
 </div>
 
 <!-- PORTFOLIO — 2 big + auto-scroller -->
-<section class="booking-section" id="portfolio">
-  <div class="booking-inner">
-    <!-- HEADER -->
-    <div class="booking-head reveal">
-      <div class="stag" style="justify-content:center;display:flex;align-items:center;gap:10px;">Currently Booking</div>
-      <h2 class="sh" style="text-align:center;font-size:clamp(32px,5vw,62px);">Pakistan's best launches.<br><em>Book your unit today.</em></h2>
-      <p style="font-size:13px;color:var(--mid);max-width:460px;margin:12px auto 0;line-height:1.8;text-align:center;">4 projects open for booking right now. Two big — two smaller. Click to explore buildings, units, floor plans.</p>
-    </div>
+<section class="bks-sec" id="portfolio">
+  <div class="bks-label reveal">
+    <div class="stag" style="display:flex;align-items:center;justify-content:center;gap:10px;">Ongoing Bookings</div>
+    <h2>Pakistan's best launches.<br><em>Book your unit today.</em></h2>
+    <p>4 projects open right now. 2 visible at once — arrow to slide through all four.</p>
+  </div>
+  <div class="bks-wrap">
+    <button class="bks-arr bks-arr-l" onclick="bksP()">&#8249;</button>
+    <div class="bks-viewport">
+      <div class="bks-track" id="bksTrack">
 
-    <!-- 2 BIG CARDS (Pearl Tower + CDC Residencia) -->
-    <div class="booking-top reveal">
-      <div class="bk-card" onclick="openProj('pearl')">
-        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170258_2e5a5d78-c17d-4a4f-84a3-72f2e807e5be.png" alt="Pearl Tower" loading="lazy">
-        <div class="bk-veil"></div>
-        <div class="bk-body">
-          <div class="bk-no">01 · High-Rise · LDA Lahore</div>
-          <div class="bk-name">Pearl Tower</div>
-          <div class="bk-loc">📍 Lahore · Studio · 1 Bed · 2 Bed</div>
-          <div class="bk-tag-row"><span class="bk-tag">From Rs.19.8L</span><span class="bk-tag">10% Booking</span></div>
-          <div class="bk-btn-row">
-            <button class="bk-explore" onclick="event.stopPropagation();openProj('pearl')">Explore →</button>
-            <button class="bk-adv" onclick="event.stopPropagation();scrollFH('adv')">Advisory</button>
-          </div>
-        </div>
-      </div>
-      <div class="bk-card" onclick="openProj('cdc')">
-        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_f2d017dc-f7b1-44ab-b762-2c2b5e54f4b6.png" alt="CDC Residencia" loading="lazy">
-        <div class="bk-veil"></div>
-        <div class="bk-body">
-          <div class="bk-no">02 · Residencia · Askari 11</div>
-          <div class="bk-name">CDC Residencia</div>
-          <div class="bk-loc">📍 Askari 11, Lahore · 1 Bed · 2 Bed</div>
-          <div class="bk-tag-row"><span class="bk-tag">From Rs.28L</span><span class="bk-tag">LDA Approved</span></div>
-          <div class="bk-btn-row">
-            <button class="bk-explore" onclick="event.stopPropagation();openProj('cdc')">Explore →</button>
-            <button class="bk-adv" onclick="event.stopPropagation();scrollFH('adv')">Advisory</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2-CARD SLIDER (Classic Homes + Al Wajaf) -->
-    <div class="reveal">
-      <div class="bk-slider-wrap">
-        <div class="bk-slider" id="bkSlider">
-          <div class="bk-slide">
-            <div class="bk-card" onclick="openProj('classic')" style="aspect-ratio:16/7;">
-              <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015910_fe27a9fd-0a98-4ae7-a13c-68979dc237cb.png" alt="Classic Homes" loading="lazy">
-              <div class="bk-veil"></div>
-              <div class="bk-body">
-                <div class="bk-no">03 · Villas · State Life Lahore</div>
-                <div class="bk-name">Classic Homes</div>
-                <div class="bk-loc">📍 State Life · 5 Marla · 10 Marla</div>
-                <div class="bk-tag-row"><span class="bk-tag">From Rs.1.2Cr</span><span class="bk-tag">LDA Approved</span></div>
-                <div class="bk-btn-row">
-                  <button class="bk-explore" onclick="event.stopPropagation();openProj('classic')">Explore →</button>
-                  <button class="bk-adv" onclick="event.stopPropagation();scrollFH('adv')">Advisory</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="bk-slide">
-            <div class="bk-card" onclick="openProj('wajaf')" style="aspect-ratio:16/7;">
-              <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170304_082cb7f2-c9bf-4047-ae69-e56e96a82f28.png" alt="Al Wajaf" loading="lazy">
-              <div class="bk-veil"></div>
-              <div class="bk-body">
-                <div class="bk-no">04 · Condo · State Life Phase 1</div>
-                <div class="bk-name">Al Wajaf Apartments</div>
-                <div class="bk-loc">📍 Kamahan-Lidher Rd · 4.6★ Google</div>
-                <div class="bk-tag-row"><span class="bk-tag">From Rs.25L</span><span class="bk-tag">On Booking</span></div>
-                <div class="bk-btn-row">
-                  <button class="bk-explore" onclick="event.stopPropagation();openProj('wajaf')">Explore →</button>
-                  <button class="bk-adv" onclick="event.stopPropagation();scrollFH('adv')">Advisory</button>
-                </div>
-              </div>
+        <div class="bks-card" onclick="openProj('pearl')">
+          <img src="assets/img/pt2.jpg" alt="Pearl Tower" loading="eager">
+          <div class="bks-veil"></div>
+          <div class="bks-body">
+            <div class="bks-n">01 · High-Rise · LDA Lahore</div>
+            <div class="bks-title">Pearl<em>Tower</em></div>
+            <div class="bks-loc">📍 Lahore · Studio · 1 Bed · 2 Bed · From Rs.19.8L</div>
+            <div class="bks-btns">
+              <button class="bks-bp" onclick="event.stopPropagation();openProj('pearl')">Explore →</button>
+              <button class="bks-bs" onclick="event.stopPropagation();scrollFH('adv')">Advisory</button>
             </div>
           </div>
         </div>
-        <div class="bk-slider-nav">
-          <button class="bk-arr" onclick="bkGo(0)">‹</button>
-          <div class="bk-dot on" onclick="bkGo(0)"></div>
-          <div class="bk-dot" onclick="bkGo(1)"></div>
-          <button class="bk-arr" onclick="bkGo(1)">›</button>
+
+        <div class="bks-card" onclick="openProj('cdc')">
+          <img src="assets/img/cdc1.jpg" alt="CDC Residencia" loading="lazy">
+          <div class="bks-veil"></div>
+          <div class="bks-body">
+            <div class="bks-n">02 · Residencia · Askari 11</div>
+            <div class="bks-title">CDC<em>Residencia</em></div>
+            <div class="bks-loc">📍 Askari 11, Lahore · 1 Bed · 2 Bed · From Rs.28L</div>
+            <div class="bks-btns">
+              <button class="bks-bp" onclick="event.stopPropagation();openProj('cdc')">Explore →</button>
+              <button class="bks-bs" onclick="event.stopPropagation();scrollFH('adv')">Advisory</button>
+            </div>
+          </div>
         </div>
+
+        <div class="bks-card" onclick="openProj('classic')">
+          <img src="assets/img/classic_gate.jpg" alt="Classic Homes" loading="lazy">
+          <div class="bks-veil"></div>
+          <div class="bks-body">
+            <div class="bks-n">03 · Villas · State Life Lahore</div>
+            <div class="bks-title">Classic<em>Homes</em></div>
+            <div class="bks-loc">📍 State Life, Lahore · 5 Marla · 10 Marla · From Rs.1.2Cr</div>
+            <div class="bks-btns">
+              <button class="bks-bp" onclick="event.stopPropagation();openProj('classic')">Explore →</button>
+              <button class="bks-bs" onclick="event.stopPropagation();scrollFH('adv')">Advisory</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="bks-card" onclick="openProj('wajaf')">
+          <img src="assets/img/alwajaf_real.jpg" alt="Al Wajaf" loading="lazy">
+          <div class="bks-veil"></div>
+          <div class="bks-body">
+            <div class="bks-n">04 · Condo · State Life Phase 1</div>
+            <div class="bks-title">Al Wajaf<em>Apartments</em></div>
+            <div class="bks-loc">📍 Kamahan-Lidher Rd · 4.6★ Google · From Rs.25L</div>
+            <div class="bks-btns">
+              <button class="bks-bp" onclick="event.stopPropagation();openProj('wajaf')">Explore →</button>
+              <button class="bks-bs" onclick="event.stopPropagation();scrollFH('adv')">Advisory</button>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
+    <button class="bks-arr bks-arr-r" onclick="bksN()">&#8250;</button>
+  </div>
+  <div class="bks-ctrl">
+    <div class="bks-dot on" onclick="bksG(0)"></div>
+    <div class="bks-dot" onclick="bksG(1)"></div>
+    <div class="bks-dot" onclick="bksG(2)"></div>
   </div>
 </section>
 
 <!-- FULL PORTFOLIO — 21 projects 1976 to today — auto-scroller -->
-<section class="full-port" id="pastprojects">
-  <div class="full-port-head reveal">
+
+
+<section class="p21-sec" id="pastprojects">
+  <div class="p21-head reveal">
     <div class="stag">The Athar's Portfolio</div>
     <h2>21 projects.<br><em>1976 to today.</em></h2>
-    <p style="font-size:12px;color:var(--mid);max-width:480px;margin:8px 0 0;line-height:1.8;">4 currently booking. 17 delivered. Three generations. One name above the door.</p>
-    <div class="port-tab-row reveal">
-      <button class="p-tab on" onclick="portFilter('all',this)">All 21</button>
-      <button class="p-tab" onclick="portFilter('bk',this)">📋 Booking Open (4)</button>
-      <button class="p-tab" onclick="portFilter('dv',this)">✅ Delivered (17)</button>
-    </div>
+    <p>4 currently booking. 17 delivered. Three generations of trusted real estate across Pakistan.</p>
   </div>
-  <div style="height:20px;"></div>
-  <div class="fp-scroller" id="fpScrollerWrap">
-    <div class="fp-track run" id="fpTrack">
-      <div class="fp-mini" onclick="openProj("pearl")">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_641d3176-ef70-4ca9-be99-20394c105c5f.png" alt="Pearl Tower" loading="lazy">
-          <div class="fp-veil"></div>
-          <div class="fp-badge bk">📋 Booking</div>
-          <div class="fp-body"><div class="fp-tag">HIGH-RISE</div><div class="fp-name">Pearl Tower</div></div>
-        </div>
-        <div class="fp-mini" onclick="openProj("cdc")">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_f2d017dc-f7b1-44ab-b762-2c2b5e54f4b6.png" alt="CDC Residencia" loading="lazy">
-          <div class="fp-veil"></div>
-          <div class="fp-badge bk">📋 Booking</div>
-          <div class="fp-body"><div class="fp-tag">RESIDENCIA</div><div class="fp-name">CDC Residencia</div></div>
-        </div>
-        <div class="fp-mini" onclick="openProj("classic")">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015910_fe27a9fd-0a98-4ae7-a13c-68979dc237cb.png" alt="Classic Homes" loading="lazy">
-          <div class="fp-veil"></div>
-          <div class="fp-badge bk">📋 Booking</div>
-          <div class="fp-body"><div class="fp-tag">VILLA</div><div class="fp-name">Classic Homes</div></div>
-        </div>
-        <div class="fp-mini" onclick="openProj("wajaf")">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170304_082cb7f2-c9bf-4047-ae69-e56e96a82f28.png" alt="Al Wajaf Apts" loading="lazy">
-          <div class="fp-veil"></div>
-          <div class="fp-badge bk">📋 Booking</div>
-          <div class="fp-body"><div class="fp-tag">CONDO</div><div class="fp-name">Al Wajaf Apts</div></div>
-        </div>
-        <div class="fp-mini" onclick="scrollFH('adv')">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015930_098d712b-029a-4cdf-86ce-f6921b79bdd1.png" alt="Imperial Garden" loading="lazy">
-          <div class="fp-veil"></div>
-          <div class="fp-badge dv">✅ Delivered</div>
-          <div class="fp-body"><div class="fp-tag">GARDEN</div><div class="fp-name">Imperial Garden</div></div>
-        </div>
-        <div class="fp-mini" onclick="scrollFH('adv')">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_93cb00d8-6182-4443-9491-f6dca13c816e.png" alt="Imperial Mall" loading="lazy">
-          <div class="fp-veil"></div>
-          <div class="fp-badge dv">✅ Delivered</div>
-          <div class="fp-body"><div class="fp-tag">COMMERCIAL</div><div class="fp-name">Imperial Mall</div></div>
-        </div>
-        <div class="fp-mini" onclick="scrollFH('adv')">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170311_2ad4c857-356e-49de-9d68-75c880b6e109.png" alt="Lahore Motorway City" loading="lazy">
-          <div class="fp-veil"></div>
-          <div class="fp-badge dv">✅ Delivered</div>
-          <div class="fp-body"><div class="fp-tag">HOUSING</div><div class="fp-name">Lahore Motorway City</div></div>
-        </div>
-        <div class="fp-mini" onclick="scrollFH('adv')">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015903_b69b5c21-65af-448d-ac82-53af096000a5.png" alt="Makki Complex" loading="lazy">
-          <div class="fp-veil"></div>
-          <div class="fp-badge dv">✅ Delivered</div>
-          <div class="fp-body"><div class="fp-tag">MIXED-USE</div><div class="fp-name">Makki Complex</div></div>
-        </div>
-        <div class="fp-mini" onclick="scrollFH('adv')">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015903_a0179eb8-706e-4f38-9260-64be61f9d8e6.png" alt="Munawar Heights" loading="lazy">
-          <div class="fp-veil"></div>
-          <div class="fp-badge dv">✅ Delivered</div>
-          <div class="fp-body"><div class="fp-tag">SERVICE APT</div><div class="fp-name">Munawar Heights</div></div>
-        </div>
-        <div class="fp-mini" onclick="scrollFH('adv')">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015910_7f614c6b-727a-43f6-bc52-3523b53e1c39.png" alt="My Homes" loading="lazy">
-          <div class="fp-veil"></div>
-          <div class="fp-badge dv">✅ Delivered</div>
-          <div class="fp-body"><div class="fp-tag">VILLAS</div><div class="fp-name">My Homes</div></div>
-        </div>
-        <div class="fp-mini" onclick="scrollFH('adv')">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015924_144ddfe0-4f22-4c4f-971c-c97f8e4b1236.png" alt="Zee Avenue" loading="lazy">
-          <div class="fp-veil"></div>
-          <div class="fp-badge dv">✅ Delivered</div>
-          <div class="fp-body"><div class="fp-tag">RESIDENTIAL</div><div class="fp-name">Zee Avenue</div></div>
-        </div>
-        <div class="fp-mini" onclick="scrollFH('adv')">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170258_2e5a5d78-c17d-4a4f-84a3-72f2e807e5be.png" alt="Tower T27" loading="lazy">
-          <div class="fp-veil"></div>
-          <div class="fp-badge dv">✅ Delivered</div>
-          <div class="fp-body"><div class="fp-tag">HIGH-RISE</div><div class="fp-name">Tower T27</div></div>
-        </div>
-        <div class="fp-mini" onclick="scrollFH('adv')">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015917_3a74b834-43e4-4f09-8b73-02acae73d94c.png" alt="Zarina Mall Liberty" loading="lazy">
-          <div class="fp-veil"></div>
-          <div class="fp-badge dv">✅ Delivered</div>
-          <div class="fp-body"><div class="fp-tag">COMMERCIAL</div><div class="fp-name">Zarina Mall Liberty</div></div>
-        </div>
-        <div class="fp-mini" onclick="scrollFH('adv')">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015930_cf8529e8-d797-4ee6-8873-3696a6457a10.jpeg" alt="Mall of Liberty" loading="lazy">
-          <div class="fp-veil"></div>
-          <div class="fp-badge dv">✅ Delivered</div>
-          <div class="fp-body"><div class="fp-tag">COMMERCIAL</div><div class="fp-name">Mall of Liberty</div></div>
-        </div>
-        <div class="fp-mini" onclick="scrollFH('adv')">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015924_67d9aaac-9468-43e2-a713-c8eb061a8c89.png" alt="Paradise Apartments" loading="lazy">
-          <div class="fp-veil"></div>
-          <div class="fp-badge dv">✅ Delivered</div>
-          <div class="fp-body"><div class="fp-tag">APARTMENT</div><div class="fp-name">Paradise Apartments</div></div>
-        </div>
-        <div class="fp-mini" onclick="scrollFH('adv')">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015917_a53954cd-83bf-4925-8ede-743ae49ebee4.png" alt="Mall 79" loading="lazy">
-          <div class="fp-veil"></div>
-          <div class="fp-badge dv">✅ Delivered</div>
-          <div class="fp-body"><div class="fp-tag">COMMERCIAL</div><div class="fp-name">Mall 79</div></div>
-        </div>
-        <div class="fp-mini" onclick="scrollFH('adv')">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015943_21c722b2-6395-4f00-9f42-74b70105e1f3.png" alt="Fortune Lake View" loading="lazy">
-          <div class="fp-veil"></div>
-          <div class="fp-badge dv">✅ Delivered</div>
-          <div class="fp-body"><div class="fp-tag">RESIDENTIAL</div><div class="fp-name">Fortune Lake View</div></div>
-        </div>
-        <div class="fp-mini" onclick="scrollFH('adv')">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_93cb00d8-6182-4443-9491-f6dca13c816e.png" alt="Happy Valley" loading="lazy">
-          <div class="fp-veil"></div>
-          <div class="fp-badge dv">✅ Delivered</div>
-          <div class="fp-body"><div class="fp-tag">HOUSING</div><div class="fp-name">Happy Valley</div></div>
-        </div>
-        <div class="fp-mini" onclick="scrollFH('adv')">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015903_a0179eb8-706e-4f38-9260-64be61f9d8e6.png" alt="PACE Fortress" loading="lazy">
-          <div class="fp-veil"></div>
-          <div class="fp-badge dv">✅ Delivered</div>
-          <div class="fp-body"><div class="fp-tag">RESIDENTIAL</div><div class="fp-name">PACE Fortress</div></div>
-        </div>
-        <div class="fp-mini" onclick="scrollFH('adv')">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015930_098d712b-029a-4cdf-86ce-f6921b79bdd1.png" alt="PACE Gujranwala" loading="lazy">
-          <div class="fp-veil"></div>
-          <div class="fp-badge dv">✅ Delivered</div>
-          <div class="fp-body"><div class="fp-tag">COMMERCIAL</div><div class="fp-name">PACE Gujranwala</div></div>
-        </div>
-        <div class="fp-mini" onclick="scrollFH('adv')">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015917_3a74b834-43e4-4f09-8b73-02acae73d94c.png" alt="PACE Gujrat" loading="lazy">
-          <div class="fp-veil"></div>
-          <div class="fp-badge dv">✅ Delivered</div>
-          <div class="fp-body"><div class="fp-tag">COMMERCIAL</div><div class="fp-name">PACE Gujrat</div></div>
-        </div>
-      <div class="fp-mini" onclick="openProj("pearl")">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_641d3176-ef70-4ca9-be99-20394c105c5f.png" alt="Pearl Tower" loading="lazy">
-          <div class="fp-veil"></div>
-          <div class="fp-badge bk">📋 Booking</div>
-          <div class="fp-body"><div class="fp-tag">HIGH-RISE</div><div class="fp-name">Pearl Tower</div></div>
-        </div>
-        <div class="fp-mini" onclick="openProj("cdc")">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_f2d017dc-f7b1-44ab-b762-2c2b5e54f4b6.png" alt="CDC Residencia" loading="lazy">
-          <div class="fp-veil"></div>
-          <div class="fp-badge bk">📋 Booking</div>
-          <div class="fp-body"><div class="fp-tag">RESIDENCIA</div><div class="fp-name">CDC Residencia</div></div>
-        </div>
-        <div class="fp-mini" onclick="openProj("classic")">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015910_fe27a9fd-0a98-4ae7-a13c-68979dc237cb.png" alt="Classic Homes" loading="lazy">
-          <div class="fp-veil"></div>
-          <div class="fp-badge bk">📋 Booking</div>
-          <div class="fp-body"><div class="fp-tag">VILLA</div><div class="fp-name">Classic Homes</div></div>
-        </div>
-        <div class="fp-mini" onclick="openProj("wajaf")">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170304_082cb7f2-c9bf-4047-ae69-e56e96a82f28.png" alt="Al Wajaf Apts" loading="lazy">
-          <div class="fp-veil"></div>
-          <div class="fp-badge bk">📋 Booking</div>
-          <div class="fp-body"><div class="fp-tag">CONDO</div><div class="fp-name">Al Wajaf Apts</div></div>
-        </div>
-        <div class="fp-mini" onclick="scrollFH('adv')">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015930_098d712b-029a-4cdf-86ce-f6921b79bdd1.png" alt="Imperial Garden" loading="lazy">
-          <div class="fp-veil"></div>
-          <div class="fp-badge dv">✅ Delivered</div>
-          <div class="fp-body"><div class="fp-tag">GARDEN</div><div class="fp-name">Imperial Garden</div></div>
-        </div>
-        <div class="fp-mini" onclick="scrollFH('adv')">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_93cb00d8-6182-4443-9491-f6dca13c816e.png" alt="Imperial Mall" loading="lazy">
-          <div class="fp-veil"></div>
-          <div class="fp-badge dv">✅ Delivered</div>
-          <div class="fp-body"><div class="fp-tag">COMMERCIAL</div><div class="fp-name">Imperial Mall</div></div>
-        </div>
-        <div class="fp-mini" onclick="scrollFH('adv')">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170311_2ad4c857-356e-49de-9d68-75c880b6e109.png" alt="Lahore Motorway City" loading="lazy">
-          <div class="fp-veil"></div>
-          <div class="fp-badge dv">✅ Delivered</div>
-          <div class="fp-body"><div class="fp-tag">HOUSING</div><div class="fp-name">Lahore Motorway City</div></div>
-        </div>
-        <div class="fp-mini" onclick="scrollFH('adv')">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015903_b69b5c21-65af-448d-ac82-53af096000a5.png" alt="Makki Complex" loading="lazy">
-          <div class="fp-veil"></div>
-          <div class="fp-badge dv">✅ Delivered</div>
-          <div class="fp-body"><div class="fp-tag">MIXED-USE</div><div class="fp-name">Makki Complex</div></div>
-        </div>
-        <div class="fp-mini" onclick="scrollFH('adv')">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015903_a0179eb8-706e-4f38-9260-64be61f9d8e6.png" alt="Munawar Heights" loading="lazy">
-          <div class="fp-veil"></div>
-          <div class="fp-badge dv">✅ Delivered</div>
-          <div class="fp-body"><div class="fp-tag">SERVICE APT</div><div class="fp-name">Munawar Heights</div></div>
-        </div>
-        <div class="fp-mini" onclick="scrollFH('adv')">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015910_7f614c6b-727a-43f6-bc52-3523b53e1c39.png" alt="My Homes" loading="lazy">
-          <div class="fp-veil"></div>
-          <div class="fp-badge dv">✅ Delivered</div>
-          <div class="fp-body"><div class="fp-tag">VILLAS</div><div class="fp-name">My Homes</div></div>
-        </div>
-        <div class="fp-mini" onclick="scrollFH('adv')">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015924_144ddfe0-4f22-4c4f-971c-c97f8e4b1236.png" alt="Zee Avenue" loading="lazy">
-          <div class="fp-veil"></div>
-          <div class="fp-badge dv">✅ Delivered</div>
-          <div class="fp-body"><div class="fp-tag">RESIDENTIAL</div><div class="fp-name">Zee Avenue</div></div>
-        </div>
-        <div class="fp-mini" onclick="scrollFH('adv')">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170258_2e5a5d78-c17d-4a4f-84a3-72f2e807e5be.png" alt="Tower T27" loading="lazy">
-          <div class="fp-veil"></div>
-          <div class="fp-badge dv">✅ Delivered</div>
-          <div class="fp-body"><div class="fp-tag">HIGH-RISE</div><div class="fp-name">Tower T27</div></div>
-        </div>
-        <div class="fp-mini" onclick="scrollFH('adv')">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015917_3a74b834-43e4-4f09-8b73-02acae73d94c.png" alt="Zarina Mall Liberty" loading="lazy">
-          <div class="fp-veil"></div>
-          <div class="fp-badge dv">✅ Delivered</div>
-          <div class="fp-body"><div class="fp-tag">COMMERCIAL</div><div class="fp-name">Zarina Mall Liberty</div></div>
-        </div>
-        <div class="fp-mini" onclick="scrollFH('adv')">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015930_cf8529e8-d797-4ee6-8873-3696a6457a10.jpeg" alt="Mall of Liberty" loading="lazy">
-          <div class="fp-veil"></div>
-          <div class="fp-badge dv">✅ Delivered</div>
-          <div class="fp-body"><div class="fp-tag">COMMERCIAL</div><div class="fp-name">Mall of Liberty</div></div>
-        </div>
-        <div class="fp-mini" onclick="scrollFH('adv')">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015924_67d9aaac-9468-43e2-a713-c8eb061a8c89.png" alt="Paradise Apartments" loading="lazy">
-          <div class="fp-veil"></div>
-          <div class="fp-badge dv">✅ Delivered</div>
-          <div class="fp-body"><div class="fp-tag">APARTMENT</div><div class="fp-name">Paradise Apartments</div></div>
-        </div>
-        <div class="fp-mini" onclick="scrollFH('adv')">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015917_a53954cd-83bf-4925-8ede-743ae49ebee4.png" alt="Mall 79" loading="lazy">
-          <div class="fp-veil"></div>
-          <div class="fp-badge dv">✅ Delivered</div>
-          <div class="fp-body"><div class="fp-tag">COMMERCIAL</div><div class="fp-name">Mall 79</div></div>
-        </div>
-        <div class="fp-mini" onclick="scrollFH('adv')">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015943_21c722b2-6395-4f00-9f42-74b70105e1f3.png" alt="Fortune Lake View" loading="lazy">
-          <div class="fp-veil"></div>
-          <div class="fp-badge dv">✅ Delivered</div>
-          <div class="fp-body"><div class="fp-tag">RESIDENTIAL</div><div class="fp-name">Fortune Lake View</div></div>
-        </div>
-        <div class="fp-mini" onclick="scrollFH('adv')">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_93cb00d8-6182-4443-9491-f6dca13c816e.png" alt="Happy Valley" loading="lazy">
-          <div class="fp-veil"></div>
-          <div class="fp-badge dv">✅ Delivered</div>
-          <div class="fp-body"><div class="fp-tag">HOUSING</div><div class="fp-name">Happy Valley</div></div>
-        </div>
-        <div class="fp-mini" onclick="scrollFH('adv')">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015903_a0179eb8-706e-4f38-9260-64be61f9d8e6.png" alt="PACE Fortress" loading="lazy">
-          <div class="fp-veil"></div>
-          <div class="fp-badge dv">✅ Delivered</div>
-          <div class="fp-body"><div class="fp-tag">RESIDENTIAL</div><div class="fp-name">PACE Fortress</div></div>
-        </div>
-        <div class="fp-mini" onclick="scrollFH('adv')">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015930_098d712b-029a-4cdf-86ce-f6921b79bdd1.png" alt="PACE Gujranwala" loading="lazy">
-          <div class="fp-veil"></div>
-          <div class="fp-badge dv">✅ Delivered</div>
-          <div class="fp-body"><div class="fp-tag">COMMERCIAL</div><div class="fp-name">PACE Gujranwala</div></div>
-        </div>
-        <div class="fp-mini" onclick="scrollFH('adv')">
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015917_3a74b834-43e4-4f09-8b73-02acae73d94c.png" alt="PACE Gujrat" loading="lazy">
-          <div class="fp-veil"></div>
-          <div class="fp-badge dv">✅ Delivered</div>
-          <div class="fp-body"><div class="fp-tag">COMMERCIAL</div><div class="fp-name">PACE Gujrat</div></div>
-        </div>
+  <div class="p21-scroll">
+    <div class="p21-track">
+      <div class="pbc2" onclick="openProj('pearl')"><img src="assets/img/pt1.jpg" alt="Pearl Tower" loading="lazy"><div class="pbc2-veil"></div><div class="pbc2-badge bk">&#x1F4CB; Booking Open</div><div class="pbc2-yr">2020</div><div class="pbc2-body"><div class="pbc2-tag">HIGH-RISE</div><div class="pbc2-name">Pearl Tower</div><button class="pbc2-cta" onclick="event.stopPropagation();openProj('pearl')">Explore &#x2192;</button></div></div><div class="pbc2" onclick="openProj('cdc')"><img src="assets/img/cdc1.jpg" alt="CDC Residencia" loading="lazy"><div class="pbc2-veil"></div><div class="pbc2-badge bk">&#x1F4CB; Booking Open</div><div class="pbc2-yr">2019</div><div class="pbc2-body"><div class="pbc2-tag">RESIDENCIA</div><div class="pbc2-name">CDC Residencia</div><button class="pbc2-cta" onclick="event.stopPropagation();openProj('cdc')">Explore &#x2192;</button></div></div><div class="pbc2" onclick="openProj('classic')"><img src="assets/img/ch1.jpg" alt="Classic Homes" loading="lazy"><div class="pbc2-veil"></div><div class="pbc2-badge bk">&#x1F4CB; Booking Open</div><div class="pbc2-yr">2021</div><div class="pbc2-body"><div class="pbc2-tag">VILLA</div><div class="pbc2-name">Classic Homes</div><button class="pbc2-cta" onclick="event.stopPropagation();openProj('classic')">Explore &#x2192;</button></div></div><div class="pbc2" onclick="openProj('wajaf')"><img src="assets/img/aw1.jpg" alt="Al Wajaf Apts" loading="lazy"><div class="pbc2-veil"></div><div class="pbc2-badge bk">&#x1F4CB; Booking Open</div><div class="pbc2-yr">2022</div><div class="pbc2-body"><div class="pbc2-tag">CONDO</div><div class="pbc2-name">Al Wajaf Apts</div><button class="pbc2-cta" onclick="event.stopPropagation();openProj('wajaf')">Explore &#x2192;</button></div></div><div class="pbc2" onclick="scrollFH('adv')"><img src="assets/img/ae.jpg" alt="Imperial Garden" loading="lazy"><div class="pbc2-veil"></div><div class="pbc2-badge dv">&#x2705; Delivered</div><div class="pbc2-yr">2018</div><div class="pbc2-body"><div class="pbc2-tag">GARDEN HOMES</div><div class="pbc2-name">Imperial Garden</div><button class="pbc2-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale &#x2192;</button></div></div><div class="pbc2" onclick="scrollFH('adv')"><img src="assets/img/imp_mall.jpg" alt="Imperial Mall" loading="lazy"><div class="pbc2-veil"></div><div class="pbc2-badge dv">&#x2705; Delivered</div><div class="pbc2-yr">2017</div><div class="pbc2-body"><div class="pbc2-tag">COMMERCIAL</div><div class="pbc2-name">Imperial Mall</div><button class="pbc2-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale &#x2192;</button></div></div><div class="pbc2" onclick="scrollFH('adv')"><img src="assets/img/motorway_city.jpg" alt="Lahore Motorway City" loading="lazy"><div class="pbc2-veil"></div><div class="pbc2-badge dv">&#x2705; Delivered</div><div class="pbc2-yr">2016</div><div class="pbc2-body"><div class="pbc2-tag">HOUSING</div><div class="pbc2-name">Lahore Motorway City</div><button class="pbc2-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale &#x2192;</button></div></div><div class="pbc2" onclick="scrollFH('adv')"><img src="assets/img/makki.jpg" alt="Makki Complex" loading="lazy"><div class="pbc2-veil"></div><div class="pbc2-badge dv">&#x2705; Delivered</div><div class="pbc2-yr">2015</div><div class="pbc2-body"><div class="pbc2-tag">MIXED-USE</div><div class="pbc2-name">Makki Complex</div><button class="pbc2-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale &#x2192;</button></div></div><div class="pbc2" onclick="scrollFH('adv')"><img src="assets/img/m1.jpg" alt="Munawar Heights" loading="lazy"><div class="pbc2-veil"></div><div class="pbc2-badge dv">&#x2705; Delivered</div><div class="pbc2-yr">2014</div><div class="pbc2-body"><div class="pbc2-tag">SERVICE APTS</div><div class="pbc2-name">Munawar Heights</div><button class="pbc2-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale &#x2192;</button></div></div><div class="pbc2" onclick="scrollFH('adv')"><img src="assets/img/ch2.jpg" alt="My Homes" loading="lazy"><div class="pbc2-veil"></div><div class="pbc2-badge dv">&#x2705; Delivered</div><div class="pbc2-yr">2013</div><div class="pbc2-body"><div class="pbc2-tag">VILLAS</div><div class="pbc2-name">My Homes</div><button class="pbc2-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale &#x2192;</button></div></div><div class="pbc2" onclick="scrollFH('adv')"><img src="assets/img/zee_ave.jpg" alt="Zee Avenue" loading="lazy"><div class="pbc2-veil"></div><div class="pbc2-badge dv">&#x2705; Delivered</div><div class="pbc2-yr">2012</div><div class="pbc2-body"><div class="pbc2-tag">RESIDENTIAL</div><div class="pbc2-name">Zee Avenue</div><button class="pbc2-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale &#x2192;</button></div></div><div class="pbc2" onclick="scrollFH('adv')"><img src="assets/img/pt2.jpg" alt="Tower T27" loading="lazy"><div class="pbc2-veil"></div><div class="pbc2-badge dv">&#x2705; Delivered</div><div class="pbc2-yr">2011</div><div class="pbc2-body"><div class="pbc2-tag">HIGH-RISE</div><div class="pbc2-name">Tower T27</div><button class="pbc2-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale &#x2192;</button></div></div><div class="pbc2" onclick="scrollFH('adv')"><img src="assets/img/zarina.jpg" alt="Zarina Mall" loading="lazy"><div class="pbc2-veil"></div><div class="pbc2-badge dv">&#x2705; Delivered</div><div class="pbc2-yr">2010</div><div class="pbc2-body"><div class="pbc2-tag">COMMERCIAL</div><div class="pbc2-name">Zarina Mall</div><button class="pbc2-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale &#x2192;</button></div></div><div class="pbc2" onclick="scrollFH('adv')"><img src="assets/img/a4.jpg" alt="Mall of Liberty" loading="lazy"><div class="pbc2-veil"></div><div class="pbc2-badge dv">&#x2705; Delivered</div><div class="pbc2-yr">2009</div><div class="pbc2-body"><div class="pbc2-tag">COMMERCIAL</div><div class="pbc2-name">Mall of Liberty</div><button class="pbc2-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale &#x2192;</button></div></div><div class="pbc2" onclick="scrollFH('adv')"><img src="assets/img/int1.jpg" alt="Paradise Apts" loading="lazy"><div class="pbc2-veil"></div><div class="pbc2-badge dv">&#x2705; Delivered</div><div class="pbc2-yr">2008</div><div class="pbc2-body"><div class="pbc2-tag">APARTMENT</div><div class="pbc2-name">Paradise Apts</div><button class="pbc2-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale &#x2192;</button></div></div><div class="pbc2" onclick="scrollFH('adv')"><img src="assets/img/g1.jpg" alt="Mall 79" loading="lazy"><div class="pbc2-veil"></div><div class="pbc2-badge dv">&#x2705; Delivered</div><div class="pbc2-yr">2007</div><div class="pbc2-body"><div class="pbc2-tag">COMMERCIAL</div><div class="pbc2-name">Mall 79</div><button class="pbc2-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale &#x2192;</button></div></div><div class="pbc2" onclick="scrollFH('adv')"><img src="assets/img/aw3.jpg" alt="Fortune Lake View" loading="lazy"><div class="pbc2-veil"></div><div class="pbc2-badge dv">&#x2705; Delivered</div><div class="pbc2-yr">2006</div><div class="pbc2-body"><div class="pbc2-tag">RESIDENTIAL</div><div class="pbc2-name">Fortune Lake View</div><button class="pbc2-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale &#x2192;</button></div></div><div class="pbc2" onclick="scrollFH('adv')"><img src="assets/img/cdc2.jpg" alt="Happy Valley" loading="lazy"><div class="pbc2-veil"></div><div class="pbc2-badge dv">&#x2705; Delivered</div><div class="pbc2-yr">2005</div><div class="pbc2-body"><div class="pbc2-tag">HOUSING</div><div class="pbc2-name">Happy Valley</div><button class="pbc2-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale &#x2192;</button></div></div><div class="pbc2" onclick="scrollFH('adv')"><img src="assets/img/m2.jpg" alt="PACE Fortress" loading="lazy"><div class="pbc2-veil"></div><div class="pbc2-badge dv">&#x2705; Delivered</div><div class="pbc2-yr">2004</div><div class="pbc2-body"><div class="pbc2-tag">RESIDENTIAL</div><div class="pbc2-name">PACE Fortress</div><button class="pbc2-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale &#x2192;</button></div></div><div class="pbc2" onclick="scrollFH('adv')"><img src="assets/img/ae.jpg" alt="PACE Gujranwala" loading="lazy"><div class="pbc2-veil"></div><div class="pbc2-badge dv">&#x2705; Delivered</div><div class="pbc2-yr">2003</div><div class="pbc2-body"><div class="pbc2-tag">COMMERCIAL</div><div class="pbc2-name">PACE Gujranwala</div><button class="pbc2-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale &#x2192;</button></div></div><div class="pbc2" onclick="scrollFH('adv')"><img src="assets/img/g2.jpg" alt="PACE Gujrat" loading="lazy"><div class="pbc2-veil"></div><div class="pbc2-badge dv">&#x2705; Delivered</div><div class="pbc2-yr">2002</div><div class="pbc2-body"><div class="pbc2-tag">COMMERCIAL</div><div class="pbc2-name">PACE Gujrat</div><button class="pbc2-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale &#x2192;</button></div></div>
+      <div class="pbc2" onclick="openProj('pearl')"><img src="assets/img/pt1.jpg" alt="Pearl Tower" loading="lazy"><div class="pbc2-veil"></div><div class="pbc2-badge bk">&#x1F4CB; Booking Open</div><div class="pbc2-yr">2020</div><div class="pbc2-body"><div class="pbc2-tag">HIGH-RISE</div><div class="pbc2-name">Pearl Tower</div><button class="pbc2-cta" onclick="event.stopPropagation();openProj('pearl')">Explore &#x2192;</button></div></div><div class="pbc2" onclick="openProj('cdc')"><img src="assets/img/cdc1.jpg" alt="CDC Residencia" loading="lazy"><div class="pbc2-veil"></div><div class="pbc2-badge bk">&#x1F4CB; Booking Open</div><div class="pbc2-yr">2019</div><div class="pbc2-body"><div class="pbc2-tag">RESIDENCIA</div><div class="pbc2-name">CDC Residencia</div><button class="pbc2-cta" onclick="event.stopPropagation();openProj('cdc')">Explore &#x2192;</button></div></div><div class="pbc2" onclick="openProj('classic')"><img src="assets/img/ch1.jpg" alt="Classic Homes" loading="lazy"><div class="pbc2-veil"></div><div class="pbc2-badge bk">&#x1F4CB; Booking Open</div><div class="pbc2-yr">2021</div><div class="pbc2-body"><div class="pbc2-tag">VILLA</div><div class="pbc2-name">Classic Homes</div><button class="pbc2-cta" onclick="event.stopPropagation();openProj('classic')">Explore &#x2192;</button></div></div><div class="pbc2" onclick="openProj('wajaf')"><img src="assets/img/aw1.jpg" alt="Al Wajaf Apts" loading="lazy"><div class="pbc2-veil"></div><div class="pbc2-badge bk">&#x1F4CB; Booking Open</div><div class="pbc2-yr">2022</div><div class="pbc2-body"><div class="pbc2-tag">CONDO</div><div class="pbc2-name">Al Wajaf Apts</div><button class="pbc2-cta" onclick="event.stopPropagation();openProj('wajaf')">Explore &#x2192;</button></div></div><div class="pbc2" onclick="scrollFH('adv')"><img src="assets/img/ae.jpg" alt="Imperial Garden" loading="lazy"><div class="pbc2-veil"></div><div class="pbc2-badge dv">&#x2705; Delivered</div><div class="pbc2-yr">2018</div><div class="pbc2-body"><div class="pbc2-tag">GARDEN HOMES</div><div class="pbc2-name">Imperial Garden</div><button class="pbc2-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale &#x2192;</button></div></div><div class="pbc2" onclick="scrollFH('adv')"><img src="assets/img/imp_mall.jpg" alt="Imperial Mall" loading="lazy"><div class="pbc2-veil"></div><div class="pbc2-badge dv">&#x2705; Delivered</div><div class="pbc2-yr">2017</div><div class="pbc2-body"><div class="pbc2-tag">COMMERCIAL</div><div class="pbc2-name">Imperial Mall</div><button class="pbc2-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale &#x2192;</button></div></div><div class="pbc2" onclick="scrollFH('adv')"><img src="assets/img/motorway_city.jpg" alt="Lahore Motorway City" loading="lazy"><div class="pbc2-veil"></div><div class="pbc2-badge dv">&#x2705; Delivered</div><div class="pbc2-yr">2016</div><div class="pbc2-body"><div class="pbc2-tag">HOUSING</div><div class="pbc2-name">Lahore Motorway City</div><button class="pbc2-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale &#x2192;</button></div></div><div class="pbc2" onclick="scrollFH('adv')"><img src="assets/img/makki.jpg" alt="Makki Complex" loading="lazy"><div class="pbc2-veil"></div><div class="pbc2-badge dv">&#x2705; Delivered</div><div class="pbc2-yr">2015</div><div class="pbc2-body"><div class="pbc2-tag">MIXED-USE</div><div class="pbc2-name">Makki Complex</div><button class="pbc2-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale &#x2192;</button></div></div><div class="pbc2" onclick="scrollFH('adv')"><img src="assets/img/m1.jpg" alt="Munawar Heights" loading="lazy"><div class="pbc2-veil"></div><div class="pbc2-badge dv">&#x2705; Delivered</div><div class="pbc2-yr">2014</div><div class="pbc2-body"><div class="pbc2-tag">SERVICE APTS</div><div class="pbc2-name">Munawar Heights</div><button class="pbc2-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale &#x2192;</button></div></div><div class="pbc2" onclick="scrollFH('adv')"><img src="assets/img/ch2.jpg" alt="My Homes" loading="lazy"><div class="pbc2-veil"></div><div class="pbc2-badge dv">&#x2705; Delivered</div><div class="pbc2-yr">2013</div><div class="pbc2-body"><div class="pbc2-tag">VILLAS</div><div class="pbc2-name">My Homes</div><button class="pbc2-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale &#x2192;</button></div></div><div class="pbc2" onclick="scrollFH('adv')"><img src="assets/img/zee_ave.jpg" alt="Zee Avenue" loading="lazy"><div class="pbc2-veil"></div><div class="pbc2-badge dv">&#x2705; Delivered</div><div class="pbc2-yr">2012</div><div class="pbc2-body"><div class="pbc2-tag">RESIDENTIAL</div><div class="pbc2-name">Zee Avenue</div><button class="pbc2-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale &#x2192;</button></div></div><div class="pbc2" onclick="scrollFH('adv')"><img src="assets/img/pt2.jpg" alt="Tower T27" loading="lazy"><div class="pbc2-veil"></div><div class="pbc2-badge dv">&#x2705; Delivered</div><div class="pbc2-yr">2011</div><div class="pbc2-body"><div class="pbc2-tag">HIGH-RISE</div><div class="pbc2-name">Tower T27</div><button class="pbc2-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale &#x2192;</button></div></div><div class="pbc2" onclick="scrollFH('adv')"><img src="assets/img/zarina.jpg" alt="Zarina Mall" loading="lazy"><div class="pbc2-veil"></div><div class="pbc2-badge dv">&#x2705; Delivered</div><div class="pbc2-yr">2010</div><div class="pbc2-body"><div class="pbc2-tag">COMMERCIAL</div><div class="pbc2-name">Zarina Mall</div><button class="pbc2-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale &#x2192;</button></div></div><div class="pbc2" onclick="scrollFH('adv')"><img src="assets/img/a4.jpg" alt="Mall of Liberty" loading="lazy"><div class="pbc2-veil"></div><div class="pbc2-badge dv">&#x2705; Delivered</div><div class="pbc2-yr">2009</div><div class="pbc2-body"><div class="pbc2-tag">COMMERCIAL</div><div class="pbc2-name">Mall of Liberty</div><button class="pbc2-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale &#x2192;</button></div></div><div class="pbc2" onclick="scrollFH('adv')"><img src="assets/img/int1.jpg" alt="Paradise Apts" loading="lazy"><div class="pbc2-veil"></div><div class="pbc2-badge dv">&#x2705; Delivered</div><div class="pbc2-yr">2008</div><div class="pbc2-body"><div class="pbc2-tag">APARTMENT</div><div class="pbc2-name">Paradise Apts</div><button class="pbc2-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale &#x2192;</button></div></div><div class="pbc2" onclick="scrollFH('adv')"><img src="assets/img/g1.jpg" alt="Mall 79" loading="lazy"><div class="pbc2-veil"></div><div class="pbc2-badge dv">&#x2705; Delivered</div><div class="pbc2-yr">2007</div><div class="pbc2-body"><div class="pbc2-tag">COMMERCIAL</div><div class="pbc2-name">Mall 79</div><button class="pbc2-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale &#x2192;</button></div></div><div class="pbc2" onclick="scrollFH('adv')"><img src="assets/img/aw3.jpg" alt="Fortune Lake View" loading="lazy"><div class="pbc2-veil"></div><div class="pbc2-badge dv">&#x2705; Delivered</div><div class="pbc2-yr">2006</div><div class="pbc2-body"><div class="pbc2-tag">RESIDENTIAL</div><div class="pbc2-name">Fortune Lake View</div><button class="pbc2-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale &#x2192;</button></div></div><div class="pbc2" onclick="scrollFH('adv')"><img src="assets/img/cdc2.jpg" alt="Happy Valley" loading="lazy"><div class="pbc2-veil"></div><div class="pbc2-badge dv">&#x2705; Delivered</div><div class="pbc2-yr">2005</div><div class="pbc2-body"><div class="pbc2-tag">HOUSING</div><div class="pbc2-name">Happy Valley</div><button class="pbc2-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale &#x2192;</button></div></div><div class="pbc2" onclick="scrollFH('adv')"><img src="assets/img/m2.jpg" alt="PACE Fortress" loading="lazy"><div class="pbc2-veil"></div><div class="pbc2-badge dv">&#x2705; Delivered</div><div class="pbc2-yr">2004</div><div class="pbc2-body"><div class="pbc2-tag">RESIDENTIAL</div><div class="pbc2-name">PACE Fortress</div><button class="pbc2-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale &#x2192;</button></div></div><div class="pbc2" onclick="scrollFH('adv')"><img src="assets/img/ae.jpg" alt="PACE Gujranwala" loading="lazy"><div class="pbc2-veil"></div><div class="pbc2-badge dv">&#x2705; Delivered</div><div class="pbc2-yr">2003</div><div class="pbc2-body"><div class="pbc2-tag">COMMERCIAL</div><div class="pbc2-name">PACE Gujranwala</div><button class="pbc2-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale &#x2192;</button></div></div><div class="pbc2" onclick="scrollFH('adv')"><img src="assets/img/g2.jpg" alt="PACE Gujrat" loading="lazy"><div class="pbc2-veil"></div><div class="pbc2-badge dv">&#x2705; Delivered</div><div class="pbc2-yr">2002</div><div class="pbc2-body"><div class="pbc2-tag">COMMERCIAL</div><div class="pbc2-name">PACE Gujrat</div><button class="pbc2-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale &#x2192;</button></div></div>
     </div>
   </div>
 </section>
 
 <!-- FAQ -->
+
+<!-- WHY US + LEGACY + VOICES -->
+<section class="wlv-sec" id="wlv">
+  <div class="wlv-inner">
+
+    <!-- SLIDE 1: Why Invest + Three Generations -->
+    <div class="wlv-slide active" id="wslide0">
+      <div class="wlv-slide-in">
+        <div class="wlv-lbl reveal">
+          <div class="stag" style="color:var(--g);margin-bottom:10px;">Why Athar's</div>
+          <h2 class="wlv-h">Numbers don't lie.<br><em>Neither do we.</em></h2>
+          <p class="wlv-sub">49 years of delivering on time. Here is what that looks like in numbers.</p>
+        </div>
+        <div class="wlv-s1-grid reveal">
+          <div class="wlv-stat">
+            <div class="wlv-sn">14%</div>
+            <div class="wlv-sl">Annual appreciation<br>in DHA Lahore</div>
+          </div>
+          <div class="wlv-stat">
+            <div class="wlv-sn">7–9%</div>
+            <div class="wlv-sl">Rental yield on<br>delivered projects</div>
+          </div>
+          <div class="wlv-stat">
+            <div class="wlv-sn">100%</div>
+            <div class="wlv-sl">LDA approved<br>portfolio</div>
+          </div>
+          <div class="wlv-stat">
+            <div class="wlv-sn">Zero</div>
+            <div class="wlv-sl">Failed or delayed<br>projects</div>
+          </div>
+        </div>
+        <div class="wlv-gen reveal">
+          <div class="wlv-gen-label">Three Generations</div>
+          <div class="wlv-gen-row">
+            <div class="wlv-gen-item">
+              <div class="wlv-gy">1976</div>
+              <div class="wlv-gi">Founded by Athar Cheema. GT Road, Lahore.</div>
+            </div>
+            <div class="wlv-gen-div"></div>
+            <div class="wlv-gen-item">
+              <div class="wlv-gy">2000s</div>
+              <div class="wlv-gi">Second generation. Expanded to housing and high-rise.</div>
+            </div>
+            <div class="wlv-gen-div"></div>
+            <div class="wlv-gen-item">
+              <div class="wlv-gy">Today</div>
+              <div class="wlv-gi">CEO Tahir Cheema. 21 projects. Two cities. One standard.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: 4 Pillars + Voices -->
+    <div class="wlv-slide" id="wslide1">
+      <div class="wlv-slide-in">
+        <div class="wlv-lbl reveal">
+          <div class="stag" style="color:var(--g);margin-bottom:10px;">Our Promise</div>
+          <h2 class="wlv-h">What we stand for.<br><em>Every single time.</em></h2>
+        </div>
+        <div class="wlv-pillars reveal">
+          <div class="wlv-pil">
+            <div class="wlv-pi">I</div>
+            <div>
+              <div class="wlv-pt">Verified Legal Standing</div>
+              <div class="wlv-pd">Every project we bring to market is LDA approved and title-clear before we accept a single booking.</div>
+            </div>
+          </div>
+          <div class="wlv-pil">
+            <div class="wlv-pi">II</div>
+            <div>
+              <div class="wlv-pt">On-Time Delivery</div>
+              <div class="wlv-pd">17 delivered projects. Not one missed its handover date. That record is our most important asset.</div>
+            </div>
+          </div>
+          <div class="wlv-pil">
+            <div class="wlv-pi">III</div>
+            <div>
+              <div class="wlv-pt">Transparent Advisory</div>
+              <div class="wlv-pd">We tell you what a project can and cannot do for you. If it is not right for you, we will say so.</div>
+            </div>
+          </div>
+          <div class="wlv-pil">
+            <div class="wlv-pi">IV</div>
+            <div>
+              <div class="wlv-pt">Post-Sale Support</div>
+              <div class="wlv-pd">From booking to possession to resale. Tahir Cheema's number is on every contract. It still works.</div>
+            </div>
+          </div>
+        </div>
+        <div class="wlv-voices reveal">
+          <div class="wlv-voice">
+            <div class="wlv-vav">RA</div>
+            <div class="wlv-vbody">
+              <div class="wlv-vq">"Bought in CDC Residencia on their advice. Handed over on time, every clause honored. Rare in this market."</div>
+              <div class="wlv-vn">Raza Ahmed · CDC Residencia</div>
+            </div>
+          </div>
+          <div class="wlv-voice">
+            <div class="wlv-vav">SM</div>
+            <div class="wlv-vbody">
+              <div class="wlv-vq">"Third property through Athar's. They have never once pushed me toward something that was not in my interest."</div>
+              <div class="wlv-vn">Sara Malik · Repeat Client · Lahore</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- NAV -->
+  <div class="wlv-nav-row">
+    <button class="wlv-arr" onclick="wlvG(wlvI-1)">&#8249;</button>
+    <div class="wlv-dot on" onclick="wlvG(0)"></div>
+    <div class="wlv-dot" onclick="wlvG(1)"></div>
+    <button class="wlv-arr" onclick="wlvG(wlvI+1)">&#8250;</button>
+  </div>
+</section>
 <section class="faq-sec" id="faq">
   <div class="faq-ta reveal">
     <div class="stag" style="justify-content:center;display:flex;align-items:center;gap:10px;">Before you ask</div>
@@ -1241,7 +1408,7 @@ footer{background:#030407;padding:42px 56px 18px;border-top:1px solid var(--ln);
 
 <!-- FIND YOUR HOME -->
 <section class="fhsec" id="findyourhome">
-  <div class="fhvid"><video id="fhVid" autoplay muted loop playsinline preload="none" poster="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170304_082cb7f2-c9bf-4047-ae69-e56e96a82f28.png"><source data-src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_171118_79e4ca70-73ee-45df-ad74-a9eca2569c76.mp4" src="" type="video/mp4"></video></div>
+  <div class="fhvid"><video id="fhVid" autoplay muted loop playsinline preload="none" poster="assets/img/aw1.jpg"><source data-src="assets/vid/fh.mp4" src="" type="video/mp4"></video></div>
   <div class="fhveil"></div>
   <div class="fhcont">
     <div class="fh-kick reveal">Your home is waiting</div>
@@ -1302,67 +1469,67 @@ footer{background:#030407;padding:42px 56px 18px;border-top:1px solid var(--ln);
 </footer>
 
 <script>
-const CDN='https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/';
+const CDN='';
 const PD={
   pearl:{name:'Pearl Tower',badge:'Apartment',loc:'Premium high-rise tower, Lahore',status:'Booking Open',sc:'am',
-    med:{t:'img',s:'https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170258_2e5a5d78-c17d-4a4f-84a3-72f2e807e5be.png'},
+    med:{t:'img',s:'assets/img/pt2.jpg'},
     desc:'Premium residential tower with city views. Currently open for booking. Limited inventory.',
     stats:{Floors:'18',Units:'180',Available:'12',Booking:'10%'},
     amenities:[['🏊','Rooftop Pool'],['🏋','Gymnasium'],['🔒','24/7 Security'],['🚗','Basement Parking'],['⚡','Generator'],['🌿','Sky Garden'],['🏬','Ground Retail'],['📡','CCTV']],
-    gallery:['https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_641d3176-ef70-4ca9-be99-20394c105c5f.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170258_2e5a5d78-c17d-4a4f-84a3-72f2e807e5be.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015924_67d9aaac-9468-43e2-a713-c8eb061a8c89.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015943_21c722b2-6395-4f00-9f42-74b70105e1f3.png'],
+    gallery:['assets/img/pt1.jpg','assets/img/pt2.jpg','assets/img/int1.jpg','assets/img/aw3.jpg'],
     loc:{area:'Lahore',near:'Premium central location',dist:'10 min to commercial hub',city:'Lahore, Punjab'},
-    buildings:[{id:'A',name:'Tower A',floors:18,avail:12,img:'https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_641d3176-ef70-4ca9-be99-20394c105c5f.png',desc:'Premium tower. Panoramic city views.'}],
+    buildings:[{id:'A',name:'Tower A',floors:18,avail:12,img:'assets/img/pt1.jpg',desc:'Premium tower. Panoramic city views.'}],
     types:['Studio','1 Bedroom','2 Bedroom'],ti:{Studio:'🛋','1 Bedroom':'🛏','2 Bedroom':'🛏🛏'},
     prices:{Studio:'Rs.19.8L–22L','1 Bedroom':'Rs.28L–34L','2 Bedroom':'Rs.38L–48L'},
     areas:{Studio:'380–420 sqft','1 Bedroom':'650–720 sqft','2 Bedroom':'1,050–1,200 sqft'},
     rooms:{Studio:['Living/Sleeping','Kitchen','Bathroom','Balcony'],'1 Bedroom':['Living Room','Bedroom','Kitchen','Bathroom','Balcony'],'2 Bedroom':['Living Room','2 Bedrooms','Kitchen','2 Bathrooms','Balcony']},
-    tgal:{Studio:['https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_641d3176-ef70-4ca9-be99-20394c105c5f.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015924_67d9aaac-9468-43e2-a713-c8eb061a8c89.png'],'1 Bedroom':['https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_f2d017dc-f7b1-44ab-b762-2c2b5e54f4b6.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170304_082cb7f2-c9bf-4047-ae69-e56e96a82f28.png'],'2 Bedroom':['https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015943_21c722b2-6395-4f00-9f42-74b70105e1f3.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170258_2e5a5d78-c17d-4a4f-84a3-72f2e807e5be.png']},
-    udImg:{Studio:'https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_641d3176-ef70-4ca9-be99-20394c105c5f.png','1 Bedroom':'https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_f2d017dc-f7b1-44ab-b762-2c2b5e54f4b6.png','2 Bedroom':'https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170258_2e5a5d78-c17d-4a4f-84a3-72f2e807e5be.png'}
+    tgal:{Studio:['assets/img/pt1.jpg','assets/img/int1.jpg'],'1 Bedroom':['assets/img/cdc1.jpg','assets/img/aw1.jpg'],'2 Bedroom':['assets/img/aw3.jpg','assets/img/pt2.jpg']},
+    udImg:{Studio:'assets/img/pt1.jpg','1 Bedroom':'assets/img/cdc1.jpg','2 Bedroom':'assets/img/pt2.jpg'}
   },
   cdc:{name:'CDC Residencia',badge:'Apartment',loc:'Askari 11, Lahore',status:'Booking Open',sc:'am',
-    med:{t:'img',s:'https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_f2d017dc-f7b1-44ab-b762-2c2b5e54f4b6.png'},
+    med:{t:'img',s:'assets/img/cdc1.jpg'},
     desc:'One of Lahore\'s most successful launches. LDA approved. Limited resale and direct booking units available.',
     stats:{Floors:'14',Units:'320',Available:'18',Booking:'10%'},
     amenities:[['🏊','Sky Pool'],['🏋','Fitness Centre'],['🔒','Access Control'],['🚗','Multi-Level Parking'],['⚡','Full Backup'],['🌿','Landscaped Gardens'],['🏬','Retail Floor'],['🏥','Medical Unit']],
-    gallery:['https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_f2d017dc-f7b1-44ab-b762-2c2b5e54f4b6.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015924_67d9aaac-9468-43e2-a713-c8eb061a8c89.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170304_082cb7f2-c9bf-4047-ae69-e56e96a82f28.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015943_21c722b2-6395-4f00-9f42-74b70105e1f3.png'],
+    gallery:['assets/img/cdc1.jpg','assets/img/int1.jpg','assets/img/aw1.jpg','assets/img/aw3.jpg'],
     loc:{area:'Askari 11',near:'Bedian Road · Cantt',dist:'12 min to DHA Lahore',city:'Lahore, Punjab'},
-    buildings:[{id:'A',name:'Block A',floors:14,avail:10,img:'https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_f2d017dc-f7b1-44ab-b762-2c2b5e54f4b6.png',desc:'Main block. Garden views.'},{id:'B',name:'Block B',floors:12,avail:8,img:'https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015924_67d9aaac-9468-43e2-a713-c8eb061a8c89.png',desc:'Premium block. Top-floor views.'}],
+    buildings:[{id:'A',name:'Block A',floors:14,avail:10,img:'assets/img/cdc1.jpg',desc:'Main block. Garden views.'},{id:'B',name:'Block B',floors:12,avail:8,img:'assets/img/int1.jpg',desc:'Premium block. Top-floor views.'}],
     types:['1 Bedroom','2 Bedroom'],ti:{'1 Bedroom':'🛏','2 Bedroom':'🛏🛏'},
     prices:{'1 Bedroom':'Rs.28L–34L','2 Bedroom':'Rs.42L–55L'},
     areas:{'1 Bedroom':'650–720 sqft','2 Bedroom':'1,100–1,350 sqft'},
     rooms:{'1 Bedroom':['Living Room','Bedroom','Kitchen','Bathroom','Balcony'],'2 Bedroom':['Living Room','2 Bedrooms','Kitchen','2 Bathrooms','Balcony']},
-    tgal:{'1 Bedroom':['https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_f2d017dc-f7b1-44ab-b762-2c2b5e54f4b6.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170304_082cb7f2-c9bf-4047-ae69-e56e96a82f28.png'],'2 Bedroom':['https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015924_67d9aaac-9468-43e2-a713-c8eb061a8c89.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015943_21c722b2-6395-4f00-9f42-74b70105e1f3.png']},
-    udImg:{'1 Bedroom':'https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_f2d017dc-f7b1-44ab-b762-2c2b5e54f4b6.png','2 Bedroom':'https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015924_67d9aaac-9468-43e2-a713-c8eb061a8c89.png'}
+    tgal:{'1 Bedroom':['assets/img/cdc1.jpg','assets/img/aw1.jpg'],'2 Bedroom':['assets/img/int1.jpg','assets/img/aw3.jpg']},
+    udImg:{'1 Bedroom':'assets/img/cdc1.jpg','2 Bedroom':'assets/img/int1.jpg'}
   },
   classic:{name:'Classic Homes',badge:'Villa',loc:'State Life Housing, Near Lake City',status:'Booking Open',sc:'gn',
-    med:{t:'img',s:'https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015910_fe27a9fd-0a98-4ae7-a13c-68979dc237cb.png'},
+    med:{t:'img',s:'assets/img/ch1.jpg'},
     desc:'LDA-approved housing scheme adjacent to Lake City Meadows. Premium boundary-wall homes, on-time handover history.',
     stats:{Plots:'150',Homes:'90',Available:'12','Status':'Move-in Ready'},
     amenities:[['🏫','School'],['🕌','Mosque'],['🌳','Central Park'],['🔒','Gated Entry'],['🚗','Wide Roads'],['⚡','Underground Utilities'],['🏪','Market'],['🏥','Clinic']],
-    gallery:['https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015910_fe27a9fd-0a98-4ae7-a13c-68979dc237cb.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015910_7f614c6b-727a-43f6-bc52-3523b53e1c39.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015924_67d9aaac-9468-43e2-a713-c8eb061a8c89.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_641d3176-ef70-4ca9-be99-20394c105c5f.png'],
+    gallery:['assets/img/ch1.jpg','assets/img/ch2.jpg','assets/img/int1.jpg','assets/img/pt1.jpg'],
     loc:{area:'State Life Housing',near:'Lake City Meadows',dist:'15 min to Ring Road',city:'Lahore, Punjab'},
-    buildings:[{id:'A',name:'Phase 1',floors:2,avail:8,img:'https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015910_fe27a9fd-0a98-4ae7-a13c-68979dc237cb.png',desc:'Move-in ready homes.'},{id:'B',name:'Phase 2',floors:2,avail:4,img:'https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015910_7f614c6b-727a-43f6-bc52-3523b53e1c39.png',desc:'Final allocation.'}],
+    buildings:[{id:'A',name:'Phase 1',floors:2,avail:8,img:'assets/img/ch1.jpg',desc:'Move-in ready homes.'},{id:'B',name:'Phase 2',floors:2,avail:4,img:'assets/img/ch2.jpg',desc:'Final allocation.'}],
     types:['5 Marla','10 Marla'],ti:{'5 Marla':'🏡','10 Marla':'🏠'},
     prices:{'5 Marla':'Rs.1.2Cr–1.5Cr','10 Marla':'Rs.2.5Cr–3.1Cr'},
     areas:{'5 Marla':'1,125 sqft','10 Marla':'2,250 sqft'},
     rooms:{'5 Marla':['Living Room','3 Bedrooms','2 Bathrooms','Kitchen','Lawn'],'10 Marla':['Double Living','4 Bedrooms','3 Bathrooms','Kitchen','Basement','Lawn']},
-    tgal:{'5 Marla':['https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015910_fe27a9fd-0a98-4ae7-a13c-68979dc237cb.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015924_67d9aaac-9468-43e2-a713-c8eb061a8c89.png'],'10 Marla':['https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015910_7f614c6b-727a-43f6-bc52-3523b53e1c39.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170258_2e5a5d78-c17d-4a4f-84a3-72f2e807e5be.png']},
-    udImg:{'5 Marla':'https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015910_fe27a9fd-0a98-4ae7-a13c-68979dc237cb.png','10 Marla':'https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015910_7f614c6b-727a-43f6-bc52-3523b53e1c39.png'}
+    tgal:{'5 Marla':['assets/img/ch1.jpg','assets/img/int1.jpg'],'10 Marla':['assets/img/ch2.jpg','assets/img/pt2.jpg']},
+    udImg:{'5 Marla':'assets/img/ch1.jpg','10 Marla':'assets/img/ch2.jpg'}
   },
   wajaf:{name:'Al Wajaf Apartments',badge:'Apartment',loc:'State Life Phase 1, Kamahan-Lidher Road',status:'Booking Open',sc:'am',
-    med:{t:'img',s:'https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170304_082cb7f2-c9bf-4047-ae69-e56e96a82f28.png'},
+    med:{t:'img',s:'assets/img/aw1.jpg'},
     desc:'Premium condominium project in State Life Phase 1. 4.6 star Google rating. Available for sale on booking with flexible payment plans.',
     stats:{Floors:'12',Units:'220',Available:'24',Booking:'15%'},
     amenities:[['🏊','Swimming Pool'],['🏋','Fitness Centre'],['🔒','Security'],['🚗','Parking'],['⚡','Backup Power'],['🌿','Garden'],['🏬','Commercial'],['👶','Kids Area']],
-    gallery:['https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170304_082cb7f2-c9bf-4047-ae69-e56e96a82f28.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015924_144ddfe0-4f22-4c4f-971c-c97f8e4b1236.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015943_21c722b2-6395-4f00-9f42-74b70105e1f3.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_f2d017dc-f7b1-44ab-b762-2c2b5e54f4b6.png'],
+    gallery:['assets/img/aw1.jpg','assets/img/aw2.jpg','assets/img/aw3.jpg','assets/img/cdc1.jpg'],
     loc:{area:'State Life Phase 1',near:'Kamahan-Lidher Road',dist:'18 min from DHA',city:'Lahore, Punjab'},
-    buildings:[{id:'A',name:'Tower 1',floors:12,avail:18,img:'https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170304_082cb7f2-c9bf-4047-ae69-e56e96a82f28.png',desc:'Main tower. Premium views.'},{id:'B',name:'Tower 2',floors:10,avail:6,img:'https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015924_144ddfe0-4f22-4c4f-971c-c97f8e4b1236.png',desc:'Mixed floor plan.'}],
+    buildings:[{id:'A',name:'Tower 1',floors:12,avail:18,img:'assets/img/aw1.jpg',desc:'Main tower. Premium views.'},{id:'B',name:'Tower 2',floors:10,avail:6,img:'assets/img/aw2.jpg',desc:'Mixed floor plan.'}],
     types:['1 Bedroom','2 Bedroom','Commercial'],ti:{'1 Bedroom':'🛏','2 Bedroom':'🛏🛏','Commercial':'🏬'},
     prices:{'1 Bedroom':'Rs.25L–32L','2 Bedroom':'Rs.45L–58L','Commercial':'Rs.81,664/sqft'},
     areas:{'1 Bedroom':'680–750 sqft','2 Bedroom':'1,100–1,350 sqft','Commercial':'400–1,200 sqft'},
     rooms:{'1 Bedroom':['Living Room','Bedroom','Kitchen','Bathroom'],'2 Bedroom':['Living Room','2 Bedrooms','Kitchen','2 Bathrooms','Balcony'],'Commercial':['Open Floor','Shopfront','Storage','WC']},
-    tgal:{'1 Bedroom':['https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015924_144ddfe0-4f22-4c4f-971c-c97f8e4b1236.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_f2d017dc-f7b1-44ab-b762-2c2b5e54f4b6.png'],'2 Bedroom':['https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170304_082cb7f2-c9bf-4047-ae69-e56e96a82f28.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015924_67d9aaac-9468-43e2-a713-c8eb061a8c89.png'],'Commercial':['https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015943_21c722b2-6395-4f00-9f42-74b70105e1f3.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_641d3176-ef70-4ca9-be99-20394c105c5f.png']},
-    udImg:{'1 Bedroom':'https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015924_144ddfe0-4f22-4c4f-971c-c97f8e4b1236.png','2 Bedroom':'https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170304_082cb7f2-c9bf-4047-ae69-e56e96a82f28.png','Commercial':'https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015943_21c722b2-6395-4f00-9f42-74b70105e1f3.png'}
+    tgal:{'1 Bedroom':['assets/img/aw2.jpg','assets/img/cdc1.jpg'],'2 Bedroom':['assets/img/aw1.jpg','assets/img/int1.jpg'],'Commercial':['assets/img/aw3.jpg','assets/img/pt1.jpg']},
+    udImg:{'1 Bedroom':'assets/img/aw2.jpg','2 Bedroom':'assets/img/aw1.jpg','Commercial':'assets/img/aw3.jpg'}
   }
 };
 var mPid=null,mBid=null,mType=null,gCur=0,gImgs=[],galCur=0,galImgs=[],udPid=null,udType=null,wlvCur=0;
@@ -1514,30 +1681,7 @@ function fqT(btn){const fi=btn.closest('.fi'),was=fi.classList.contains('open');
 var ap='adv';
 function selPath(p){ap=p;['adv','view'].forEach(x=>{document.getElementById('fp-'+x).classList.toggle('sel',x===p);document.getElementById('fp-'+x).querySelector('.fhp-chk').textContent=x===p?'✓':'';});document.getElementById('fhft').textContent=p==='adv'?'Request an Advisory Call':'Book a Site Visit';document.getElementById('ffpri').textContent=p==='adv'?'Request Advisory Call →':'Book Viewing →';}
 function scrollFH(p){selPath(p);document.getElementById('findyourhome').scrollIntoView({behavior:'smooth'});}
-function wlvPrev(){wlvGo(Math.max(0,wlvCur-1));}
-function wlvNext(){wlvGo(Math.min(1,wlvCur+1));}
-function applyHeroSearch(){
-  // Read all 4 hero search dropdowns
-  var sels=document.querySelectorAll('.sbar .sfs');
-  var type=sels[1]?sels[1].value:'Any type';
-  var beds=sels[2]?sels[2].value:'Any';
-  // Map to filter
-  var filter='all';
-  if(type==='Apartment')filter='apt';
-  else if(type==='Villa')filter='vil';
-  else if(type==='Plot')filter='plt';
-  else if(type==='Commercial')filter='com';
-  // Apply filter
-  document.querySelectorAll('.ift').forEach(function(b){b.classList.remove('on');});
-  var targetBtn=document.querySelector('.ift[onclick*="'+filter+'"]');
-  if(targetBtn)targetBtn.classList.add('on');
-  else document.querySelector('.ift').classList.add('on');
-  document.querySelectorAll('.icard').forEach(function(c){
-    c.style.display=(filter==='all'||c.dataset.t===filter)?'flex':'none';
-  });
-  // Scroll
-  document.getElementById('inventory').scrollIntoView({behavior:'smooth'});
-}
+
 function hFF(e){
   e.preventDefault();
   var inputs=document.querySelectorAll('.fhform .ffi,.fhform .ffs');
@@ -1646,567 +1790,58 @@ function portFilter(type,btn){
   else{track.classList.remove('run');}
 }
 
-var bkI=0,bkT=null,bkP=0;
-function bkGT(n){
-  var sl=document.querySelectorAll(".bk-slide-item");
-  var dt=document.querySelectorAll(".bk-d2");
-  if(sl[bkI])sl[bkI].classList.remove("active");
-  if(dt[bkI])dt[bkI].classList.remove("on");
-  bkI=((n%4)+4)%4;
-  if(sl[bkI])sl[bkI].classList.add("active");
-  if(dt[bkI])dt[bkI].classList.add("on");
-  var s=document.getElementById("bkSlides");
-  if(s)s.style.transform="translateX(-"+(bkI*100)+"%)";
-  var nm=document.getElementById("bkN");
-  if(nm)nm.textContent=bkI+1;
-  bkP=0;
-  var b=document.getElementById("bkBar");
-  if(b)b.style.width="0%";
-  if(bkT)clearInterval(bkT);
-  bkT=setInterval(function(){
-    bkP+=0.4;
-    var br=document.getElementById("bkBar");
-    if(br)br.style.width=Math.min(bkP,100)+"%";
-    if(bkP>=100){clearInterval(bkT);bkGT(bkI+1);}
+
+// ── BKS 2-up carousel ────────────────────────────────────────
+
+
+
+// ── BKS 2-up slider (shows 2 at once, 3 scroll positions) ──
+var bksI=0,bksTm=null,bksPr=0;
+function bksG(n){
+  bksI=((n%3)+3)%3;
+  var tr=document.getElementById('bksTrack');
+  if(tr){
+    var vp=tr.parentElement;
+    var cardW=(vp.clientWidth-16)/2;
+    tr.style.transform='translateX(-'+(bksI*(cardW+16))+'px)';
+  }
+  document.querySelectorAll('.bks-dot').forEach(function(d,i){
+    d.classList.toggle('on',i===bksI);
+  });
+  bksPr=0;
+  if(bksTm)clearInterval(bksTm);
+  bksTm=setInterval(function(){
+    bksPr+=0.38;
+    if(bksPr>=100){clearInterval(bksTm);bksG(bksI+1);}
   },25);
 }
-function bkNX(){bkGT(bkI+1);}
-function bkPV(){bkGT(bkI-1);}
-window.addEventListener("DOMContentLoaded",function(){bkGT(0);});
-// SELF-TEST on load
-window.addEventListener('DOMContentLoaded', function() {
-  // Immediately reveal any elements already in viewport
-  document.querySelectorAll('.reveal,.pil,.vs').forEach(function(el){
-    var rect=el.getBoundingClientRect();
-    if(rect.top < window.innerHeight && rect.bottom > 0){el.classList.add('vis');}
+function bksN(){bksG(bksI+1);}
+function bksP(){bksG(bksI-1);}
+window.addEventListener('DOMContentLoaded',function(){setTimeout(function(){bksG(0);},100);});
+window.addEventListener('resize',function(){bksG(bksI);});
+
+// Touch swipe on booking carousel
+(function(){
+  var el=document.getElementById('bksTrack');
+  if(!el)return;
+  var sx=0;
+  el.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;},{passive:true});
+  el.addEventListener('touchend',function(e){
+    var dx=e.changedTouches[0].clientX-sx;
+    if(Math.abs(dx)>40){dx<0?bksN():bksP();}
   });
+})();
 
-  var fns = ['openUD','closeUD','udTab','galNav','buildGalPop','openProj','closeModal',
-             'mGo','buildBlds','selBld','buildUnits','selUT','updateMGlry','buildMGlry',
-             'mGalGo','gNext','gPrev','wlvGo','wlvPrev','wlvNext','fqT','selPath','scrollFH','hFF','hGo','fInv'];
-  var ok=true;
-  fns.forEach(function(f){if(typeof window[f]!=='function'){console.error('MISSING:',f);ok=false;}});
-  if(ok) console.log('✅ All',fns.length,'functions verified');
-  // Check all critical IDs
-  var ids=['udPop','wlvSlider','portTrack','invGrid','modal','gal-slides'];
-  ids.forEach(function(id){if(!document.getElementById(id)){console.error('MISSING ID:',id);ok=false;}});
-  if(ok) console.log('✅ All critical IDs present');
-});
-
-
-// REVEAL SAFETY NET: force-show anything still hidden after 1.5s
-setTimeout(function(){
-  document.querySelectorAll('.reveal:not(.vis),.pil:not(.vis),.vs:not(.vis)').forEach(function(el){
-    el.classList.add('vis');
+// ── WLV 2-slide section ─────────────────────────────────────
+var wlvI=0;
+function wlvG(n){
+  wlvI=((n%2)+2)%2;
+  document.querySelectorAll('.wlv-slide').forEach(function(s,i){
+    s.classList.toggle('active',i===wlvI);
   });
-}, 1500);
-</script></body></html<section class="booking-sec" id="portfolio">
-  <div class="booking-label reveal">
-    <div class="stag" style="justify-content:center;display:flex;align-items:center;gap:10px;">Currently Booking</div>
-    <h2>Pakistan's best launches.<br><em>Book your unit today.</em></h2>
-    <p>4 projects, open right now. Auto-advances every 6 seconds. Click to explore full details.</p>
-  </div>
-  <div class="bk-carousel">
-    <div class="bk-slides" id="bkSlides">
-      <div class="bk-slide-item active"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170258_2e5a5d78-c17d-4a4f-84a3-72f2e807e5be.png" loading="eager"><div class="bk-veil"></div><div class="bk-body"><div class="bk-num">01 · Booking Open Now</div><div class="bk-name">Pearl<em>Tower</em></div><div class="bk-loc">&#x1F4CD; Premium High-Rise, Lahore</div><div class="bk-tags"><span class="bk-tag">Studio</span><span class="bk-tag">1 Bed</span><span class="bk-tag">2 Bed</span><span class="bk-tag">From Rs.19.8L</span></div><div class="bk-btns"><button class="bk-btn-p" onclick="openProj('pearl')">Explore Project &#x2192;</button><button class="bk-btn-s" onclick="scrollFH('adv')">Book Advisory</button></div></div></div>
-      <div class="bk-slide-item"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_f2d017dc-f7b1-44ab-b762-2c2b5e54f4b6.png" loading="lazy"><div class="bk-veil"></div><div class="bk-body"><div class="bk-num">02 · Booking Open Now</div><div class="bk-name">CDC<em>Residencia</em></div><div class="bk-loc">&#x1F4CD; Residencia, Askari 11 Lahore</div><div class="bk-tags"><span class="bk-tag">1 Bed</span><span class="bk-tag">2 Bed</span><span class="bk-tag">LDA Approved</span><span class="bk-tag">From Rs.28L</span></div><div class="bk-btns"><button class="bk-btn-p" onclick="openProj('cdc')">Explore Project &#x2192;</button><button class="bk-btn-s" onclick="scrollFH('adv')">Book Advisory</button></div></div></div>
-      <div class="bk-slide-item"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015910_fe27a9fd-0a98-4ae7-a13c-68979dc237cb.png" loading="lazy"><div class="bk-veil"></div><div class="bk-body"><div class="bk-num">03 · Booking Open Now</div><div class="bk-name">Classic<em>Homes</em></div><div class="bk-loc">&#x1F4CD; Gated Villas, State Life Lahore</div><div class="bk-tags"><span class="bk-tag">5 Marla</span><span class="bk-tag">10 Marla</span><span class="bk-tag">LDA Approved</span><span class="bk-tag">From Rs.1.2Cr</span></div><div class="bk-btns"><button class="bk-btn-p" onclick="openProj('classic')">Explore Project &#x2192;</button><button class="bk-btn-s" onclick="scrollFH('adv')">Book Advisory</button></div></div></div>
-      <div class="bk-slide-item"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170304_082cb7f2-c9bf-4047-ae69-e56e96a82f28.png" loading="lazy"><div class="bk-veil"></div><div class="bk-body"><div class="bk-num">04 · Booking Open Now</div><div class="bk-name">Al Wajaf<em>Apartments</em></div><div class="bk-loc">&#x1F4CD; Condo, State Life Phase 1 Lahore</div><div class="bk-tags"><span class="bk-tag">1 Bed</span><span class="bk-tag">2 Bed</span><span class="bk-tag">Commercial</span><span class="bk-tag">4.6 Google</span></div><div class="bk-btns"><button class="bk-btn-p" onclick="openProj('wajaf')">Explore Project &#x2192;</button><button class="bk-btn-s" onclick="scrollFH('adv')">Book Advisory</button></div></div></div>
-    </div>
-    <div class="bk-progress-bar" id="bkBar"></div>
-    <div class="bk-ctrl">
-      <div class="bk-ctr-txt"><strong id="bkN">1</strong> / 4</div>
-      <div class="bk-dots2">
-        <div class="bk-d2 on" onclick="bkGT(0)"></div>
-        <div class="bk-d2" onclick="bkGT(1)"></div>
-        <div class="bk-d2" onclick="bkGT(2)"></div>
-        <div class="bk-d2" onclick="bkGT(3)"></div>
-      </div>
-    </div>
-    <div class="bk-arrows2">
-      <div class="bk-arr2" onclick="bkPV()">&#8249;</div>
-      <div class="bk-arr2" onclick="bkNX()">&#8250;</div>
-    </div>
-  </div>
-</section>
-
-<section class="port21-sec" id="pastprojects">
-  <div class="port21-head reveal">
-    <div class="stag" style="justify-content:center;display:flex;align-items:center;gap:10px;">The Athar's Portfolio</div>
-    <h2>21 projects.<br><em>1976 to today.</em></h2>
-    <p>4 currently booking. 17 delivered. Three generations of trust across Lahore, Gujranwala, and Gujrat.</p>
-  </div>
-  <div class="port21-scroll">
-    <div class="port21-track">
-        <div class="pbc" onclick="openProj('pearl')"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_641d3176-ef70-4ca9-be99-20394c105c5f.png" alt="Pearl Tower" loading="lazy"><div class="pbc-veil"></div><div class="pbc-badge bk">Booking Open</div><div class="pbc-yr">2020</div><div class="pbc-body"><div class="pbc-tag">HIGH-RISE</div><div class="pbc-name">Pearl Tower</div><button class="pbc-cta" onclick="event.stopPropagation();openProj('pearl')">Explore</button></div></div>
-        <div class="pbc" onclick="openProj('cdc')"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_f2d017dc-f7b1-44ab-b762-2c2b5e54f4b6.png" alt="CDC Residencia" loading="lazy"><div class="pbc-veil"></div><div class="pbc-badge bk">Booking Open</div><div class="pbc-yr">2019</div><div class="pbc-body"><div class="pbc-tag">RESIDENCIA</div><div class="pbc-name">CDC Residencia</div><button class="pbc-cta" onclick="event.stopPropagation();openProj('cdc')">Explore</button></div></div>
-        <div class="pbc" onclick="openProj('classic')"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015910_fe27a9fd-0a98-4ae7-a13c-68979dc237cb.png" alt="Classic Homes" loading="lazy"><div class="pbc-veil"></div><div class="pbc-badge bk">Booking Open</div><div class="pbc-yr">2021</div><div class="pbc-body"><div class="pbc-tag">VILLA</div><div class="pbc-name">Classic Homes</div><button class="pbc-cta" onclick="event.stopPropagation();openProj('classic')">Explore</button></div></div>
-        <div class="pbc" onclick="openProj('wajaf')"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170304_082cb7f2-c9bf-4047-ae69-e56e96a82f28.png" alt="Al Wajaf Apts" loading="lazy"><div class="pbc-veil"></div><div class="pbc-badge bk">Booking Open</div><div class="pbc-yr">2022</div><div class="pbc-body"><div class="pbc-tag">CONDO</div><div class="pbc-name">Al Wajaf Apts</div><button class="pbc-cta" onclick="event.stopPropagation();openProj('wajaf')">Explore</button></div></div>
-        <div class="pbc" onclick="scrollFH('adv')"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015930_098d712b-029a-4cdf-86ce-f6921b79bdd1.png" alt="Imperial Garden" loading="lazy"><div class="pbc-veil"></div><div class="pbc-badge dv">Delivered</div><div class="pbc-yr">2018</div><div class="pbc-body"><div class="pbc-tag">GARDEN HOMES</div><div class="pbc-name">Imperial Garden</div><button class="pbc-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale</button></div></div>
-        <div class="pbc" onclick="scrollFH('adv')"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_93cb00d8-6182-4443-9491-f6dca13c816e.png" alt="Imperial Mall" loading="lazy"><div class="pbc-veil"></div><div class="pbc-badge dv">Delivered</div><div class="pbc-yr">2017</div><div class="pbc-body"><div class="pbc-tag">COMMERCIAL</div><div class="pbc-name">Imperial Mall</div><button class="pbc-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale</button></div></div>
-        <div class="pbc" onclick="scrollFH('adv')"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170311_2ad4c857-356e-49de-9d68-75c880b6e109.png" alt="Lahore Motorway City" loading="lazy"><div class="pbc-veil"></div><div class="pbc-badge dv">Delivered</div><div class="pbc-yr">2016</div><div class="pbc-body"><div class="pbc-tag">HOUSING SCHEME</div><div class="pbc-name">Lahore Motorway City</div><button class="pbc-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale</button></div></div>
-        <div class="pbc" onclick="scrollFH('adv')"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015903_b69b5c21-65af-448d-ac82-53af096000a5.png" alt="Makki Complex" loading="lazy"><div class="pbc-veil"></div><div class="pbc-badge dv">Delivered</div><div class="pbc-yr">2015</div><div class="pbc-body"><div class="pbc-tag">MIXED-USE</div><div class="pbc-name">Makki Complex</div><button class="pbc-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale</button></div></div>
-        <div class="pbc" onclick="scrollFH('adv')"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015903_a0179eb8-706e-4f38-9260-64be61f9d8e6.png" alt="Munawar Heights" loading="lazy"><div class="pbc-veil"></div><div class="pbc-badge dv">Delivered</div><div class="pbc-yr">2014</div><div class="pbc-body"><div class="pbc-tag">SERVICE APTS</div><div class="pbc-name">Munawar Heights</div><button class="pbc-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale</button></div></div>
-        <div class="pbc" onclick="scrollFH('adv')"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015910_7f614c6b-727a-43f6-bc52-3523b53e1c39.png" alt="My Homes" loading="lazy"><div class="pbc-veil"></div><div class="pbc-badge dv">Delivered</div><div class="pbc-yr">2013</div><div class="pbc-body"><div class="pbc-tag">VILLAS</div><div class="pbc-name">My Homes</div><button class="pbc-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale</button></div></div>
-        <div class="pbc" onclick="scrollFH('adv')"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015924_144ddfe0-4f22-4c4f-971c-c97f8e4b1236.png" alt="Zee Avenue" loading="lazy"><div class="pbc-veil"></div><div class="pbc-badge dv">Delivered</div><div class="pbc-yr">2012</div><div class="pbc-body"><div class="pbc-tag">RESIDENTIAL</div><div class="pbc-name">Zee Avenue</div><button class="pbc-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale</button></div></div>
-        <div class="pbc" onclick="scrollFH('adv')"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170258_2e5a5d78-c17d-4a4f-84a3-72f2e807e5be.png" alt="Tower T27" loading="lazy"><div class="pbc-veil"></div><div class="pbc-badge dv">Delivered</div><div class="pbc-yr">2011</div><div class="pbc-body"><div class="pbc-tag">HIGH-RISE</div><div class="pbc-name">Tower T27</div><button class="pbc-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale</button></div></div>
-        <div class="pbc" onclick="scrollFH('adv')"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015917_3a74b834-43e4-4f09-8b73-02acae73d94c.png" alt="Zarina Mall Liberty" loading="lazy"><div class="pbc-veil"></div><div class="pbc-badge dv">Delivered</div><div class="pbc-yr">2010</div><div class="pbc-body"><div class="pbc-tag">COMMERCIAL</div><div class="pbc-name">Zarina Mall Liberty</div><button class="pbc-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale</button></div></div>
-        <div class="pbc" onclick="scrollFH('adv')"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015930_cf8529e8-d797-4ee6-8873-3696a6457a10.jpeg" alt="Mall of Liberty" loading="lazy"><div class="pbc-veil"></div><div class="pbc-badge dv">Delivered</div><div class="pbc-yr">2009</div><div class="pbc-body"><div class="pbc-tag">COMMERCIAL</div><div class="pbc-name">Mall of Liberty</div><button class="pbc-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale</button></div></div>
-        <div class="pbc" onclick="scrollFH('adv')"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015924_67d9aaac-9468-43e2-a713-c8eb061a8c89.png" alt="Paradise Apartments" loading="lazy"><div class="pbc-veil"></div><div class="pbc-badge dv">Delivered</div><div class="pbc-yr">2008</div><div class="pbc-body"><div class="pbc-tag">APARTMENT</div><div class="pbc-name">Paradise Apartments</div><button class="pbc-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale</button></div></div>
-        <div class="pbc" onclick="scrollFH('adv')"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015917_a53954cd-83bf-4925-8ede-743ae49ebee4.png" alt="Mall 79" loading="lazy"><div class="pbc-veil"></div><div class="pbc-badge dv">Delivered</div><div class="pbc-yr">2007</div><div class="pbc-body"><div class="pbc-tag">COMMERCIAL</div><div class="pbc-name">Mall 79</div><button class="pbc-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale</button></div></div>
-        <div class="pbc" onclick="scrollFH('adv')"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015943_21c722b2-6395-4f00-9f42-74b70105e1f3.png" alt="Fortune Lake View" loading="lazy"><div class="pbc-veil"></div><div class="pbc-badge dv">Delivered</div><div class="pbc-yr">2006</div><div class="pbc-body"><div class="pbc-tag">RESIDENTIAL</div><div class="pbc-name">Fortune Lake View</div><button class="pbc-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale</button></div></div>
-        <div class="pbc" onclick="scrollFH('adv')"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_93cb00d8-6182-4443-9491-f6dca13c816e.png" alt="Happy Valley" loading="lazy"><div class="pbc-veil"></div><div class="pbc-badge dv">Delivered</div><div class="pbc-yr">2005</div><div class="pbc-body"><div class="pbc-tag">HOUSING</div><div class="pbc-name">Happy Valley</div><button class="pbc-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale</button></div></div>
-        <div class="pbc" onclick="scrollFH('adv')"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015903_a0179eb8-706e-4f38-9260-64be61f9d8e6.png" alt="PACE Fortress" loading="lazy"><div class="pbc-veil"></div><div class="pbc-badge dv">Delivered</div><div class="pbc-yr">2004</div><div class="pbc-body"><div class="pbc-tag">RESIDENTIAL</div><div class="pbc-name">PACE Fortress</div><button class="pbc-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale</button></div></div>
-        <div class="pbc" onclick="scrollFH('adv')"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015930_098d712b-029a-4cdf-86ce-f6921b79bdd1.png" alt="PACE Gujranwala" loading="lazy"><div class="pbc-veil"></div><div class="pbc-badge dv">Delivered</div><div class="pbc-yr">2003</div><div class="pbc-body"><div class="pbc-tag">COMMERCIAL</div><div class="pbc-name">PACE Gujranwala</div><button class="pbc-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale</button></div></div>
-        <div class="pbc" onclick="scrollFH('adv')"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015917_3a74b834-43e4-4f09-8b73-02acae73d94c.png" alt="PACE Gujrat" loading="lazy"><div class="pbc-veil"></div><div class="pbc-badge dv">Delivered</div><div class="pbc-yr">2002</div><div class="pbc-body"><div class="pbc-tag">COMMERCIAL</div><div class="pbc-name">PACE Gujrat</div><button class="pbc-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale</button></div></div>
-        <div class="pbc" onclick="openProj('pearl')"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_641d3176-ef70-4ca9-be99-20394c105c5f.png" alt="Pearl Tower" loading="lazy"><div class="pbc-veil"></div><div class="pbc-badge bk">Booking Open</div><div class="pbc-yr">2020</div><div class="pbc-body"><div class="pbc-tag">HIGH-RISE</div><div class="pbc-name">Pearl Tower</div><button class="pbc-cta" onclick="event.stopPropagation();openProj('pearl')">Explore</button></div></div>
-        <div class="pbc" onclick="openProj('cdc')"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_f2d017dc-f7b1-44ab-b762-2c2b5e54f4b6.png" alt="CDC Residencia" loading="lazy"><div class="pbc-veil"></div><div class="pbc-badge bk">Booking Open</div><div class="pbc-yr">2019</div><div class="pbc-body"><div class="pbc-tag">RESIDENCIA</div><div class="pbc-name">CDC Residencia</div><button class="pbc-cta" onclick="event.stopPropagation();openProj('cdc')">Explore</button></div></div>
-        <div class="pbc" onclick="openProj('classic')"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015910_fe27a9fd-0a98-4ae7-a13c-68979dc237cb.png" alt="Classic Homes" loading="lazy"><div class="pbc-veil"></div><div class="pbc-badge bk">Booking Open</div><div class="pbc-yr">2021</div><div class="pbc-body"><div class="pbc-tag">VILLA</div><div class="pbc-name">Classic Homes</div><button class="pbc-cta" onclick="event.stopPropagation();openProj('classic')">Explore</button></div></div>
-        <div class="pbc" onclick="openProj('wajaf')"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170304_082cb7f2-c9bf-4047-ae69-e56e96a82f28.png" alt="Al Wajaf Apts" loading="lazy"><div class="pbc-veil"></div><div class="pbc-badge bk">Booking Open</div><div class="pbc-yr">2022</div><div class="pbc-body"><div class="pbc-tag">CONDO</div><div class="pbc-name">Al Wajaf Apts</div><button class="pbc-cta" onclick="event.stopPropagation();openProj('wajaf')">Explore</button></div></div>
-        <div class="pbc" onclick="scrollFH('adv')"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015930_098d712b-029a-4cdf-86ce-f6921b79bdd1.png" alt="Imperial Garden" loading="lazy"><div class="pbc-veil"></div><div class="pbc-badge dv">Delivered</div><div class="pbc-yr">2018</div><div class="pbc-body"><div class="pbc-tag">GARDEN HOMES</div><div class="pbc-name">Imperial Garden</div><button class="pbc-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale</button></div></div>
-        <div class="pbc" onclick="scrollFH('adv')"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_93cb00d8-6182-4443-9491-f6dca13c816e.png" alt="Imperial Mall" loading="lazy"><div class="pbc-veil"></div><div class="pbc-badge dv">Delivered</div><div class="pbc-yr">2017</div><div class="pbc-body"><div class="pbc-tag">COMMERCIAL</div><div class="pbc-name">Imperial Mall</div><button class="pbc-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale</button></div></div>
-        <div class="pbc" onclick="scrollFH('adv')"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170311_2ad4c857-356e-49de-9d68-75c880b6e109.png" alt="Lahore Motorway City" loading="lazy"><div class="pbc-veil"></div><div class="pbc-badge dv">Delivered</div><div class="pbc-yr">2016</div><div class="pbc-body"><div class="pbc-tag">HOUSING SCHEME</div><div class="pbc-name">Lahore Motorway City</div><button class="pbc-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale</button></div></div>
-        <div class="pbc" onclick="scrollFH('adv')"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015903_b69b5c21-65af-448d-ac82-53af096000a5.png" alt="Makki Complex" loading="lazy"><div class="pbc-veil"></div><div class="pbc-badge dv">Delivered</div><div class="pbc-yr">2015</div><div class="pbc-body"><div class="pbc-tag">MIXED-USE</div><div class="pbc-name">Makki Complex</div><button class="pbc-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale</button></div></div>
-        <div class="pbc" onclick="scrollFH('adv')"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015903_a0179eb8-706e-4f38-9260-64be61f9d8e6.png" alt="Munawar Heights" loading="lazy"><div class="pbc-veil"></div><div class="pbc-badge dv">Delivered</div><div class="pbc-yr">2014</div><div class="pbc-body"><div class="pbc-tag">SERVICE APTS</div><div class="pbc-name">Munawar Heights</div><button class="pbc-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale</button></div></div>
-        <div class="pbc" onclick="scrollFH('adv')"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015910_7f614c6b-727a-43f6-bc52-3523b53e1c39.png" alt="My Homes" loading="lazy"><div class="pbc-veil"></div><div class="pbc-badge dv">Delivered</div><div class="pbc-yr">2013</div><div class="pbc-body"><div class="pbc-tag">VILLAS</div><div class="pbc-name">My Homes</div><button class="pbc-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale</button></div></div>
-        <div class="pbc" onclick="scrollFH('adv')"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015924_144ddfe0-4f22-4c4f-971c-c97f8e4b1236.png" alt="Zee Avenue" loading="lazy"><div class="pbc-veil"></div><div class="pbc-badge dv">Delivered</div><div class="pbc-yr">2012</div><div class="pbc-body"><div class="pbc-tag">RESIDENTIAL</div><div class="pbc-name">Zee Avenue</div><button class="pbc-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale</button></div></div>
-        <div class="pbc" onclick="scrollFH('adv')"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170258_2e5a5d78-c17d-4a4f-84a3-72f2e807e5be.png" alt="Tower T27" loading="lazy"><div class="pbc-veil"></div><div class="pbc-badge dv">Delivered</div><div class="pbc-yr">2011</div><div class="pbc-body"><div class="pbc-tag">HIGH-RISE</div><div class="pbc-name">Tower T27</div><button class="pbc-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale</button></div></div>
-        <div class="pbc" onclick="scrollFH('adv')"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015917_3a74b834-43e4-4f09-8b73-02acae73d94c.png" alt="Zarina Mall Liberty" loading="lazy"><div class="pbc-veil"></div><div class="pbc-badge dv">Delivered</div><div class="pbc-yr">2010</div><div class="pbc-body"><div class="pbc-tag">COMMERCIAL</div><div class="pbc-name">Zarina Mall Liberty</div><button class="pbc-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale</button></div></div>
-        <div class="pbc" onclick="scrollFH('adv')"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015930_cf8529e8-d797-4ee6-8873-3696a6457a10.jpeg" alt="Mall of Liberty" loading="lazy"><div class="pbc-veil"></div><div class="pbc-badge dv">Delivered</div><div class="pbc-yr">2009</div><div class="pbc-body"><div class="pbc-tag">COMMERCIAL</div><div class="pbc-name">Mall of Liberty</div><button class="pbc-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale</button></div></div>
-        <div class="pbc" onclick="scrollFH('adv')"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015924_67d9aaac-9468-43e2-a713-c8eb061a8c89.png" alt="Paradise Apartments" loading="lazy"><div class="pbc-veil"></div><div class="pbc-badge dv">Delivered</div><div class="pbc-yr">2008</div><div class="pbc-body"><div class="pbc-tag">APARTMENT</div><div class="pbc-name">Paradise Apartments</div><button class="pbc-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale</button></div></div>
-        <div class="pbc" onclick="scrollFH('adv')"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015917_a53954cd-83bf-4925-8ede-743ae49ebee4.png" alt="Mall 79" loading="lazy"><div class="pbc-veil"></div><div class="pbc-badge dv">Delivered</div><div class="pbc-yr">2007</div><div class="pbc-body"><div class="pbc-tag">COMMERCIAL</div><div class="pbc-name">Mall 79</div><button class="pbc-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale</button></div></div>
-        <div class="pbc" onclick="scrollFH('adv')"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015943_21c722b2-6395-4f00-9f42-74b70105e1f3.png" alt="Fortune Lake View" loading="lazy"><div class="pbc-veil"></div><div class="pbc-badge dv">Delivered</div><div class="pbc-yr">2006</div><div class="pbc-body"><div class="pbc-tag">RESIDENTIAL</div><div class="pbc-name">Fortune Lake View</div><button class="pbc-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale</button></div></div>
-        <div class="pbc" onclick="scrollFH('adv')"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_93cb00d8-6182-4443-9491-f6dca13c816e.png" alt="Happy Valley" loading="lazy"><div class="pbc-veil"></div><div class="pbc-badge dv">Delivered</div><div class="pbc-yr">2005</div><div class="pbc-body"><div class="pbc-tag">HOUSING</div><div class="pbc-name">Happy Valley</div><button class="pbc-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale</button></div></div>
-        <div class="pbc" onclick="scrollFH('adv')"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015903_a0179eb8-706e-4f38-9260-64be61f9d8e6.png" alt="PACE Fortress" loading="lazy"><div class="pbc-veil"></div><div class="pbc-badge dv">Delivered</div><div class="pbc-yr">2004</div><div class="pbc-body"><div class="pbc-tag">RESIDENTIAL</div><div class="pbc-name">PACE Fortress</div><button class="pbc-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale</button></div></div>
-        <div class="pbc" onclick="scrollFH('adv')"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015930_098d712b-029a-4cdf-86ce-f6921b79bdd1.png" alt="PACE Gujranwala" loading="lazy"><div class="pbc-veil"></div><div class="pbc-badge dv">Delivered</div><div class="pbc-yr">2003</div><div class="pbc-body"><div class="pbc-tag">COMMERCIAL</div><div class="pbc-name">PACE Gujranwala</div><button class="pbc-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale</button></div></div>
-        <div class="pbc" onclick="scrollFH('adv')"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015917_3a74b834-43e4-4f09-8b73-02acae73d94c.png" alt="PACE Gujrat" loading="lazy"><div class="pbc-veil"></div><div class="pbc-badge dv">Delivered</div><div class="pbc-yr">2002</div><div class="pbc-body"><div class="pbc-tag">COMMERCIAL</div><div class="pbc-name">PACE Gujrat</div><button class="pbc-cta" onclick="event.stopPropagation();scrollFH('adv')">Resale</button></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section class="faq-sec" id="faq">
-  <div class="faq-ta reveal">
-    <div class="stag" style="justify-content:center;display:flex;align-items:center;gap:10px;">Before you ask</div>
-    <h2 class="faq-h">Questions buyers<br><em>always ask first.</em></h2>
-    <p class="faq-sub">Answered honestly. Yours not here? A senior advisor answers it — no scripts.</p>
-    <div style="margin-top:20px;"><a href="#findyourhome" class="ncta" style="display:inline-block;">Book a 20-min call →</a></div>
-  </div>
-  <div class="faq-grid reveal">
-    <div class="fi"><button class="fi-q" onclick="fqT(this)"><div class="fi-ql"><span class="fi-n">01</span><span class="fi-t">Is this a listing portal?</span></div><span class="fi-ic">+</span></button><div class="fi-a"><div class="fi-ai">No. Athar's is a curated showcase. Every project is title-verified and NOC-cleared before any advisor is briefed on it. Not a portal — a curator.</div></div></div>
-    <div class="fi"><button class="fi-q" onclick="fqT(this)"><div class="fi-ql"><span class="fi-n">02</span><span class="fi-t">Do you charge buyers any fee?</span></div><span class="fi-ic">+</span></button><div class="fi-a"><div class="fi-ai">Zero buyer-side fee. Our compensation comes from developers on closed transactions only. Same price you'd get directly, plus the full advisory layer.</div></div></div>
-    <div class="fi"><button class="fi-q" onclick="fqT(this)"><div class="fi-ql"><span class="fi-n">03</span><span class="fi-t">Can I view remotely from overseas?</span></div><span class="fi-ic">+</span></button><div class="fi-a"><div class="fi-ai">Yes. Live video walk-throughs, drone footage, an advisor on the ground as your eyes. We've placed properties for clients in the UK, Dubai, Canada, and Australia.</div></div></div>
-    <div class="fi"><button class="fi-q" onclick="fqT(this)"><div class="fi-ql"><span class="fi-n">04</span><span class="fi-t">How do payments and transfer work?</span></div><span class="fi-ic">+</span></button><div class="fi-a"><div class="fi-ai">All payments go directly to the developer through official channels. We never touch your funds. Title verification, NOC, and transfer paperwork handled end-to-end.</div></div></div>
-    <div class="fi"><button class="fi-q" onclick="fqT(this)"><div class="fi-ql"><span class="fi-n">05</span><span class="fi-t">Can you find off-market inventory?</span></div><span class="fi-ic">+</span></button><div class="fi-a"><div class="fi-ai">Almost certainly. The site is our active showcase. Our off-market inventory is larger. Tell an advisor what you need — they return 3–5 vetted options before public launch.</div></div></div>
-    <div class="fi"><button class="fi-q" onclick="fqT(this)"><div class="fi-ql"><span class="fi-n">06</span><span class="fi-t">What does LDA Approved mean for me?</span></div><span class="fi-ic">+</span></button><div class="fi-a"><div class="fi-ai">LDA approval means the Lahore Development Authority verified the land title, confirmed it's clean, and approved construction. Legal difference between a secure investment and one that could be demolished or seized.</div></div></div>
-  </div>
-</section>
-
-<!-- FIND YOUR HOME -->
-<section class="fhsec" id="findyourhome">
-  <div class="fhvid"><video id="fhVid" autoplay muted loop playsinline preload="none" poster="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170304_082cb7f2-c9bf-4047-ae69-e56e96a82f28.png"><source data-src="https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_171118_79e4ca70-73ee-45df-ad74-a9eca2569c76.mp4" src="" type="video/mp4"></video></div>
-  <div class="fhveil"></div>
-  <div class="fhcont">
-    <div class="fh-kick reveal">Your home is waiting</div>
-    <h2 class="fh-h reveal">The right home<br><em>changes everything.</em></h2>
-    <p class="fh-sub reveal">49 years of helping Pakistani families find where they truly belong. One advisor. One call.</p>
-    <div class="fh-paths reveal">
-      <div class="fhp sel" id="fp-adv" onclick="selPath('adv')"><div class="fhp-chk">✓</div><div class="fhp-ic">💬</div><div class="fhp-ti">Book Advisory</div><div class="fhp-su">Expert guidance — what to buy, where, when. Investment or live-in.</div></div>
-      <div class="fhp" id="fp-view" onclick="selPath('view')"><div class="fhp-chk"></div><div class="fhp-ic">🏠</div><div class="fhp-ti">Book a Viewing</div><div class="fhp-su">Site visit or virtual walk-through for a specific project.</div></div>
-    </div>
-    <div class="fh-fw reveal">
-      <div class="fh-ft" id="fhft">Request an Advisory Call</div>
-      <div class="fhform">
-        <div class="ffg"><label class="ffl">Full Name</label><input type="text" class="ffi" placeholder="Your name" required></div>
-        <div class="ffg"><label class="ffl">WhatsApp / Phone</label><input type="tel" class="ffi" placeholder="+92 300 0000000" required></div>
-        <div class="ffg"><label class="ffl">Looking for</label><select class="ffs"><option>Residential — to live in</option><option>Residential — investment</option><option>Commercial / yield</option><option>Plot for development</option></select></div>
-        <div class="ffg"><label class="ffl">Budget (PKR)</label><select class="ffs"><option>Under 1 Crore</option><option>1 – 3 Crore</option><option>3 – 10 Crore</option><option>Above 10 Crore</option></select></div>
-        <div class="ffg"><label class="ffl">Best time to call</label><select class="ffs"><option>Morning 9AM–12PM</option><option>Afternoon 12–4PM</option><option>Evening 4–8PM</option><option>Any time</option></select></div>
-        <div class="ffg"><label class="ffl">Project interest</label><select class="ffs"><option>Not sure yet</option><option>Al-Noor Heights</option><option>Munawar Heights</option><option>My Home</option><option>Al Nafay City</option><option>Al Wajaf (Booking)</option></select></div>
-        <div class="fh-ctas f2 ffg"><button class="fhpri" id="ffpri" onclick="hFF(event)">Request Advisory Call →</button><button class="fhsec2" onclick="selPath('view')">Book Viewing Instead</button></div>
-        <div class="fhnote f2">Replies within 1 business day · One named advisor · Confidential · Zero fee</div>
-      </div>
-    </div>
-  </div>
-  <div class="fhci-row">
-    <div class="fhci"><div class="fhci-l">WhatsApp / Phone</div><div class="fhci-v">0340 1111 422</div></div>
-    <div class="fhci-sep"></div>
-    <div class="fhci"><div class="fhci-l">Email</div><div class="fhci-v">info@atharsmarketing.net</div></div>
-    <div class="fhci-sep"></div>
-    <div class="fhci"><div class="fhci-l">Lahore HQ</div><div class="fhci-v">GT Road · Lahore</div></div>
-    <div class="fhci-sep"></div>
-    <div class="fhci"><div class="fhci-l">Islamabad</div><div class="fhci-v">F18 Faisal Town</div></div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="ft-g">
-    <div><a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" style="display:block;text-decoration:none;cursor:pointer;"><svg viewBox="0 0 240 100" xmlns="http://www.w3.org/2000/svg" style="height:80px;width:auto;display:block;margin-bottom:10px;">
-  <g transform="translate(70, 4)">
-    <path d="M 50 38 L 50 12 L 14 38 Z" fill="#2BA8E0"/>
-    <path d="M 50 12 L 50 38 L 86 38 Z" fill="#8DC641"/>
-    <path d="M 8 38 L 50 6 L 92 38" fill="none" stroke="#C8102E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  </g>
-  <text x="120" y="62" font-family="Cormorant Garamond, Georgia, serif" font-size="26" font-weight="600" fill="#FFFFFF" text-anchor="middle">athar&apos;s</text>
-  <text x="120" y="76" font-family="Montserrat, sans-serif" font-size="7" font-weight="500" letter-spacing="2" fill="#FFFFFF" text-anchor="middle" opacity="0.75">marketing network</text>
-  <text x="120" y="90" font-family="Cormorant Garamond, Georgia, serif" font-size="9" font-style="italic" fill="#C9A961" text-anchor="middle" opacity="0.9">a friend you trust · since 1976</text>
-</svg></a><div class="ft-tag" style="margin-top:4px;">Real Estate, Curated. Since 1976.</div><p class="ft-body">Pakistan's most trusted real estate network. Three generations. One name.</p></div>
-    <div><div class="ft-ch">Properties</div><ul class="ft-l"><li><a href="#inventory">All Units</a></li><li><a href="#inventory">Apartments</a></li><li><a href="#inventory">Villas</a></li><li><a href="#inventory">Plots</a></li></ul></div>
-    <div><div class="ft-ch">Projects</div><ul class="ft-l"><li><a href="#portfolio">Al-Noor Heights</a></li><li><a href="#portfolio">Munawar Heights</a></li><li><a href="#portfolio">My Home</a></li><li><a href="#portfolio">Al Nafay City</a></li></ul></div>
-    <div><div class="ft-ch">Contact</div><ul class="ft-l"><li><a href="tel:03401111422">0340 1111 422</a></li><li><a href="mailto:info@atharsmarketing.net">Email</a></li><li><a href="#faq">FAQ</a></li><li><a href="#findyourhome">Book Advisory</a></li></ul></div>
-  </div>
-  <div class="ft-bot"><div class="ft-copy">© 2026 Athar's Marketing Network · Est. 1976</div><div class="ft-soc">
-  <a href="https://www.facebook.com/atharsmarketing" target="_blank" rel="noopener" class="fsoc" title="Facebook">f</a>
-  <a href="https://www.linkedin.com/company/athars-marketing-network" target="_blank" rel="noopener" class="fsoc" title="LinkedIn">in</a>
-  <a href="https://www.instagram.com/atharsmarketing" target="_blank" rel="noopener" class="fsoc" title="Instagram">ig</a>
-  <a href="https://wa.me/923401111422" target="_blank" rel="noopener" class="fsoc" title="WhatsApp">w</a>
-</div></div>
-</footer>
-
-<script>
-const CDN='https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/';
-const PD={
-  pearl:{name:'Pearl Tower',badge:'Apartment',loc:'Premium high-rise tower, Lahore',status:'Booking Open',sc:'am',
-    med:{t:'img',s:'https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170258_2e5a5d78-c17d-4a4f-84a3-72f2e807e5be.png'},
-    desc:'Premium residential tower with city views. Currently open for booking. Limited inventory.',
-    stats:{Floors:'18',Units:'180',Available:'12',Booking:'10%'},
-    amenities:[['🏊','Rooftop Pool'],['🏋','Gymnasium'],['🔒','24/7 Security'],['🚗','Basement Parking'],['⚡','Generator'],['🌿','Sky Garden'],['🏬','Ground Retail'],['📡','CCTV']],
-    gallery:['https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_641d3176-ef70-4ca9-be99-20394c105c5f.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170258_2e5a5d78-c17d-4a4f-84a3-72f2e807e5be.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015924_67d9aaac-9468-43e2-a713-c8eb061a8c89.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015943_21c722b2-6395-4f00-9f42-74b70105e1f3.png'],
-    loc:{area:'Lahore',near:'Premium central location',dist:'10 min to commercial hub',city:'Lahore, Punjab'},
-    buildings:[{id:'A',name:'Tower A',floors:18,avail:12,img:'https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_641d3176-ef70-4ca9-be99-20394c105c5f.png',desc:'Premium tower. Panoramic city views.'}],
-    types:['Studio','1 Bedroom','2 Bedroom'],ti:{Studio:'🛋','1 Bedroom':'🛏','2 Bedroom':'🛏🛏'},
-    prices:{Studio:'Rs.19.8L–22L','1 Bedroom':'Rs.28L–34L','2 Bedroom':'Rs.38L–48L'},
-    areas:{Studio:'380–420 sqft','1 Bedroom':'650–720 sqft','2 Bedroom':'1,050–1,200 sqft'},
-    rooms:{Studio:['Living/Sleeping','Kitchen','Bathroom','Balcony'],'1 Bedroom':['Living Room','Bedroom','Kitchen','Bathroom','Balcony'],'2 Bedroom':['Living Room','2 Bedrooms','Kitchen','2 Bathrooms','Balcony']},
-    tgal:{Studio:['https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_641d3176-ef70-4ca9-be99-20394c105c5f.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015924_67d9aaac-9468-43e2-a713-c8eb061a8c89.png'],'1 Bedroom':['https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_f2d017dc-f7b1-44ab-b762-2c2b5e54f4b6.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170304_082cb7f2-c9bf-4047-ae69-e56e96a82f28.png'],'2 Bedroom':['https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015943_21c722b2-6395-4f00-9f42-74b70105e1f3.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170258_2e5a5d78-c17d-4a4f-84a3-72f2e807e5be.png']},
-    udImg:{Studio:'https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_641d3176-ef70-4ca9-be99-20394c105c5f.png','1 Bedroom':'https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_f2d017dc-f7b1-44ab-b762-2c2b5e54f4b6.png','2 Bedroom':'https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170258_2e5a5d78-c17d-4a4f-84a3-72f2e807e5be.png'}
-  },
-  cdc:{name:'CDC Residencia',badge:'Apartment',loc:'Askari 11, Lahore',status:'Booking Open',sc:'am',
-    med:{t:'img',s:'https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_f2d017dc-f7b1-44ab-b762-2c2b5e54f4b6.png'},
-    desc:'One of Lahore\'s most successful launches. LDA approved. Limited resale and direct booking units available.',
-    stats:{Floors:'14',Units:'320',Available:'18',Booking:'10%'},
-    amenities:[['🏊','Sky Pool'],['🏋','Fitness Centre'],['🔒','Access Control'],['🚗','Multi-Level Parking'],['⚡','Full Backup'],['🌿','Landscaped Gardens'],['🏬','Retail Floor'],['🏥','Medical Unit']],
-    gallery:['https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_f2d017dc-f7b1-44ab-b762-2c2b5e54f4b6.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015924_67d9aaac-9468-43e2-a713-c8eb061a8c89.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170304_082cb7f2-c9bf-4047-ae69-e56e96a82f28.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015943_21c722b2-6395-4f00-9f42-74b70105e1f3.png'],
-    loc:{area:'Askari 11',near:'Bedian Road · Cantt',dist:'12 min to DHA Lahore',city:'Lahore, Punjab'},
-    buildings:[{id:'A',name:'Block A',floors:14,avail:10,img:'https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_f2d017dc-f7b1-44ab-b762-2c2b5e54f4b6.png',desc:'Main block. Garden views.'},{id:'B',name:'Block B',floors:12,avail:8,img:'https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015924_67d9aaac-9468-43e2-a713-c8eb061a8c89.png',desc:'Premium block. Top-floor views.'}],
-    types:['1 Bedroom','2 Bedroom'],ti:{'1 Bedroom':'🛏','2 Bedroom':'🛏🛏'},
-    prices:{'1 Bedroom':'Rs.28L–34L','2 Bedroom':'Rs.42L–55L'},
-    areas:{'1 Bedroom':'650–720 sqft','2 Bedroom':'1,100–1,350 sqft'},
-    rooms:{'1 Bedroom':['Living Room','Bedroom','Kitchen','Bathroom','Balcony'],'2 Bedroom':['Living Room','2 Bedrooms','Kitchen','2 Bathrooms','Balcony']},
-    tgal:{'1 Bedroom':['https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_f2d017dc-f7b1-44ab-b762-2c2b5e54f4b6.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170304_082cb7f2-c9bf-4047-ae69-e56e96a82f28.png'],'2 Bedroom':['https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015924_67d9aaac-9468-43e2-a713-c8eb061a8c89.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015943_21c722b2-6395-4f00-9f42-74b70105e1f3.png']},
-    udImg:{'1 Bedroom':'https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_f2d017dc-f7b1-44ab-b762-2c2b5e54f4b6.png','2 Bedroom':'https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015924_67d9aaac-9468-43e2-a713-c8eb061a8c89.png'}
-  },
-  classic:{name:'Classic Homes',badge:'Villa',loc:'State Life Housing, Near Lake City',status:'Booking Open',sc:'gn',
-    med:{t:'img',s:'https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015910_fe27a9fd-0a98-4ae7-a13c-68979dc237cb.png'},
-    desc:'LDA-approved housing scheme adjacent to Lake City Meadows. Premium boundary-wall homes, on-time handover history.',
-    stats:{Plots:'150',Homes:'90',Available:'12','Status':'Move-in Ready'},
-    amenities:[['🏫','School'],['🕌','Mosque'],['🌳','Central Park'],['🔒','Gated Entry'],['🚗','Wide Roads'],['⚡','Underground Utilities'],['🏪','Market'],['🏥','Clinic']],
-    gallery:['https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015910_fe27a9fd-0a98-4ae7-a13c-68979dc237cb.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015910_7f614c6b-727a-43f6-bc52-3523b53e1c39.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015924_67d9aaac-9468-43e2-a713-c8eb061a8c89.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_641d3176-ef70-4ca9-be99-20394c105c5f.png'],
-    loc:{area:'State Life Housing',near:'Lake City Meadows',dist:'15 min to Ring Road',city:'Lahore, Punjab'},
-    buildings:[{id:'A',name:'Phase 1',floors:2,avail:8,img:'https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015910_fe27a9fd-0a98-4ae7-a13c-68979dc237cb.png',desc:'Move-in ready homes.'},{id:'B',name:'Phase 2',floors:2,avail:4,img:'https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015910_7f614c6b-727a-43f6-bc52-3523b53e1c39.png',desc:'Final allocation.'}],
-    types:['5 Marla','10 Marla'],ti:{'5 Marla':'🏡','10 Marla':'🏠'},
-    prices:{'5 Marla':'Rs.1.2Cr–1.5Cr','10 Marla':'Rs.2.5Cr–3.1Cr'},
-    areas:{'5 Marla':'1,125 sqft','10 Marla':'2,250 sqft'},
-    rooms:{'5 Marla':['Living Room','3 Bedrooms','2 Bathrooms','Kitchen','Lawn'],'10 Marla':['Double Living','4 Bedrooms','3 Bathrooms','Kitchen','Basement','Lawn']},
-    tgal:{'5 Marla':['https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015910_fe27a9fd-0a98-4ae7-a13c-68979dc237cb.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015924_67d9aaac-9468-43e2-a713-c8eb061a8c89.png'],'10 Marla':['https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015910_7f614c6b-727a-43f6-bc52-3523b53e1c39.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170258_2e5a5d78-c17d-4a4f-84a3-72f2e807e5be.png']},
-    udImg:{'5 Marla':'https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015910_fe27a9fd-0a98-4ae7-a13c-68979dc237cb.png','10 Marla':'https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015910_7f614c6b-727a-43f6-bc52-3523b53e1c39.png'}
-  },
-  wajaf:{name:'Al Wajaf Apartments',badge:'Apartment',loc:'State Life Phase 1, Kamahan-Lidher Road',status:'Booking Open',sc:'am',
-    med:{t:'img',s:'https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170304_082cb7f2-c9bf-4047-ae69-e56e96a82f28.png'},
-    desc:'Premium condominium project in State Life Phase 1. 4.6 star Google rating. Available for sale on booking with flexible payment plans.',
-    stats:{Floors:'12',Units:'220',Available:'24',Booking:'15%'},
-    amenities:[['🏊','Swimming Pool'],['🏋','Fitness Centre'],['🔒','Security'],['🚗','Parking'],['⚡','Backup Power'],['🌿','Garden'],['🏬','Commercial'],['👶','Kids Area']],
-    gallery:['https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170304_082cb7f2-c9bf-4047-ae69-e56e96a82f28.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015924_144ddfe0-4f22-4c4f-971c-c97f8e4b1236.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015943_21c722b2-6395-4f00-9f42-74b70105e1f3.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_f2d017dc-f7b1-44ab-b762-2c2b5e54f4b6.png'],
-    loc:{area:'State Life Phase 1',near:'Kamahan-Lidher Road',dist:'18 min from DHA',city:'Lahore, Punjab'},
-    buildings:[{id:'A',name:'Tower 1',floors:12,avail:18,img:'https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170304_082cb7f2-c9bf-4047-ae69-e56e96a82f28.png',desc:'Main tower. Premium views.'},{id:'B',name:'Tower 2',floors:10,avail:6,img:'https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015924_144ddfe0-4f22-4c4f-971c-c97f8e4b1236.png',desc:'Mixed floor plan.'}],
-    types:['1 Bedroom','2 Bedroom','Commercial'],ti:{'1 Bedroom':'🛏','2 Bedroom':'🛏🛏','Commercial':'🏬'},
-    prices:{'1 Bedroom':'Rs.25L–32L','2 Bedroom':'Rs.45L–58L','Commercial':'Rs.81,664/sqft'},
-    areas:{'1 Bedroom':'680–750 sqft','2 Bedroom':'1,100–1,350 sqft','Commercial':'400–1,200 sqft'},
-    rooms:{'1 Bedroom':['Living Room','Bedroom','Kitchen','Bathroom'],'2 Bedroom':['Living Room','2 Bedrooms','Kitchen','2 Bathrooms','Balcony'],'Commercial':['Open Floor','Shopfront','Storage','WC']},
-    tgal:{'1 Bedroom':['https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015924_144ddfe0-4f22-4c4f-971c-c97f8e4b1236.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_f2d017dc-f7b1-44ab-b762-2c2b5e54f4b6.png'],'2 Bedroom':['https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170304_082cb7f2-c9bf-4047-ae69-e56e96a82f28.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015924_67d9aaac-9468-43e2-a713-c8eb061a8c89.png'],'Commercial':['https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015943_21c722b2-6395-4f00-9f42-74b70105e1f3.png','https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015856_641d3176-ef70-4ca9-be99-20394c105c5f.png']},
-    udImg:{'1 Bedroom':'https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015924_144ddfe0-4f22-4c4f-971c-c97f8e4b1236.png','2 Bedroom':'https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_170304_082cb7f2-c9bf-4047-ae69-e56e96a82f28.png','Commercial':'https://d8j0ntlcm91z4.cloudfront.net/user_3A4BLQYlkqlIIcq5F4BohQmaHaz/hf_20260524_015943_21c722b2-6395-4f00-9f42-74b70105e1f3.png'}
-  }
-};
-var mPid=null,mBid=null,mType=null,gCur=0,gImgs=[],galCur=0,galImgs=[],udPid=null,udType=null,wlvCur=0;
-
-// HERO
-var hc=0;const hvs=document.querySelectorAll('.hvid'),hds=document.querySelectorAll('.hdot');
-function hGo(n){hvs[hc].classList.remove('on');hds[hc].classList.remove('on');hc=n;hvs[hc].classList.add('on');hds[hc].classList.add('on');const v=hvs[hc].querySelector('video');if(v){v.currentTime=0;v.play().catch(()=>{});}}
-setInterval(()=>hGo((hc+1)%2),12000);
-window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('sol',scrollY>50));
-
-// INVENTORY FILTER
-function fInv(t,el){document.querySelectorAll('.ift').forEach(b=>b.classList.remove('on'));el.classList.add('on');document.querySelectorAll('.icard').forEach(c=>c.style.display=(t==='all'||c.dataset.t===t)?'flex':'none');}
-
-// RICH POPUP
-function openUD(pid,type){
-  udPid=pid;udType=type;
-  const p=PD[pid];
-  document.getElementById('udp-ptag').textContent=p.name;
-  document.getElementById('udp-name').textContent=type;
-  document.getElementById('udp-price').textContent=p.prices[type]||'Price on request';
-  document.getElementById('udp-projlink').onclick=()=>{closeUD();openProj(pid);};
-  // Gallery
-  galImgs=p.udImg[type]?[p.udImg[type],...p.gallery.filter(s=>s!==p.udImg[type])]:p.gallery;
-  galCur=0;buildGalPop();
-  // Specs
-  const rm=p.rooms[type]||[];
-  document.getElementById('udp-specs').innerHTML=`
-    <div class="udp-spec-item"><div class="udps-v">${(p.areas[type]||'—').split('–')[0]}</div><div class="udps-l">Area</div></div>
-    <div class="udp-spec-item"><div class="udps-v">10%</div><div class="udps-l">Booking</div></div>
-    <div class="udp-spec-item"><div class="udps-v">LDA ✓</div><div class="udps-l">Approved</div></div>
-    <div class="udp-spec-item"><div class="udps-v">${rm.length}</div><div class="udps-l">Rooms</div></div>`;
-  // Floor plan rooms
-  document.getElementById('udp-rooms').innerHTML=rm.map(r=>`<div class="udp-room">${r}</div>`).join('');
-  // Amenities
-  document.getElementById('udp-amen-grid').innerHTML=p.amenities.map(([ico,name])=>`<div class="udp-am-item"><div class="udp-am-ico">${ico}</div><div class="udp-am-name">${name}</div></div>`).join('');
-  // Location
-  const loc=p.loc||{};
-  document.getElementById('udp-loc-info').innerHTML=`
-    <div class="udp-loc-item"><div class="udp-loc-l">Area</div><div class="udp-loc-v">${loc.area||'—'}</div></div>
-    <div class="udp-loc-item"><div class="udp-loc-l">Nearby</div><div class="udp-loc-v">${loc.near||'—'}</div></div>
-    <div class="udp-loc-item"><div class="udp-loc-l">Distance</div><div class="udp-loc-v">${loc.dist||'—'}</div></div>
-    <div class="udp-loc-item"><div class="udp-loc-l">City</div><div class="udp-loc-v">${loc.city||'Lahore, Punjab'}</div></div>`;
-  udTab('gallery',document.querySelector('.udp-tab'));
-  document.getElementById('udPop').classList.add('open');
-  document.body.style.overflow='hidden';
-}
-function closeUD(){document.getElementById('udPop').classList.remove('open');document.body.style.overflow='';}
-function udTab(id,el){
-  document.querySelectorAll('.udp-tab').forEach(t=>t.classList.remove('on'));
-  document.querySelectorAll('.udp-panel').forEach(p=>p.classList.remove('on'));
-  if(el)el.classList.add('on');
-  const panel=document.getElementById('udp-'+id);
-  if(panel)panel.classList.add('on');
-}
-function buildGalPop(){
-  const slides=document.getElementById('gal-slides');
-  const dots=document.getElementById('gal-dots');
-  const thumbs=document.getElementById('udp-thumbs');
-  slides.innerHTML='';dots.innerHTML='';thumbs.innerHTML='';
-  galImgs.forEach((src,i)=>{
-    const s=document.createElement('div');s.className='gal-slide'+(i===0?' on':'');
-    s.innerHTML=`<img src="${src}" loading="lazy">`;slides.appendChild(s);
-    const d=document.createElement('div');d.className='gal-dot'+(i===0?' on':'');
-    d.onclick=()=>galGo(i);dots.appendChild(d);
-    const th=document.createElement('div');th.className='gal-thumb'+(i===0?' on':'');
-    th.innerHTML=`<img src="${src}" loading="lazy">`;th.onclick=()=>galGo(i);thumbs.appendChild(th);
+  document.querySelectorAll('.wlv-dot').forEach(function(d,i){
+    d.classList.toggle('on',i===wlvI);
   });
-}
-function galGo(n){
-  const slides=document.getElementById('gal-slides').querySelectorAll('.gal-slide');
-  const dots=document.getElementById('gal-dots').querySelectorAll('.gal-dot');
-  const thumbs=document.getElementById('udp-thumbs').querySelectorAll('.gal-thumb');
-  slides[galCur].classList.remove('on');dots[galCur].classList.remove('on');thumbs[galCur].classList.remove('on');
-  galCur=n;slides[galCur].classList.add('on');dots[galCur].classList.add('on');thumbs[galCur].classList.add('on');
-}
-function galNav(d){galGo((galCur+d+galImgs.length)%galImgs.length);}
-
-// PROJECT MODAL
-function openProj(pid){
-  mPid=pid;mBid=null;mType=null;
-  const p=PD[pid];
-  document.getElementById('mhb').textContent=p.badge;
-  document.getElementById('mht').textContent=p.name;
-  if(p.med.t==='vid') document.getElementById('s0med').innerHTML=`<video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;"><source src="${p.med.s}" type="video/mp4"></video>`;
-  else document.getElementById('s0med').innerHTML=`<img src="${p.med.s}" style="width:100%;height:100%;object-fit:cover;filter:brightness(.62);">`;
-  document.getElementById('s0hc').innerHTML=`<div class="s0hb">${p.badge}</div><div class="s0hn">${p.name}</div><div class="s0hl">📍 ${p.loc}</div>`;
-  const ss=document.getElementById('s0hs');ss.textContent=p.status;ss.className='s0hs '+p.sc;
-  document.getElementById('s0d').textContent=p.desc;
-  document.getElementById('s0sr').innerHTML=Object.entries(p.stats).map(([k,v])=>`<div class="s0st"><div class="s0sl">${k}</div><div class="s0sv">${v}</div></div>`).join('');
-  document.getElementById('s0am').innerHTML=p.amenities.map(([ico,n])=>`<div class="s0a">${ico} ${n}</div>`).join('');
-  const r=document.getElementById('s0r');r.innerHTML='';p.gallery.forEach(src=>{const d=document.createElement('div');d.className='s0gi';d.innerHTML=`<img src="${src}" loading="lazy">`;r.appendChild(d);});
-  ['ms1','ms2'].forEach(id=>document.getElementById(id).style.display='none');
-  document.getElementById('ms0').style.display='';
-  ['ts1','mt1','ts2','mt2'].forEach(id=>{const el=document.getElementById(id);if(el){el.style.display='none';el.classList.remove('on');}});
-  document.getElementById('mt0').classList.add('on');
-  document.getElementById('modal').classList.add('open');
-  document.body.style.overflow='hidden';
-}
-function closeModal(){document.getElementById('modal').classList.remove('open');document.body.style.overflow='';}
-function mGo(step){
-  ['ms0','ms1','ms2'].forEach(id=>document.getElementById(id).style.display='none');
-  document.getElementById('ms'+step).style.display='';
-  if(step===1)buildBlds();if(step===2)buildUnits();
-  if(step>0){['ts1','mt1'].forEach(id=>document.getElementById(id).style.display='');}
-  if(step>1){['ts2','mt2'].forEach(id=>document.getElementById(id).style.display='');}
-  document.querySelectorAll('.tb').forEach(b=>b.classList.remove('on'));
-  document.getElementById('mt'+step).classList.add('on');
-  document.getElementById('modal').querySelector('.mbody').scrollTop=0;
-}
-function buildBlds(){
-  const p=PD[mPid];document.getElementById('s1t').textContent='Select a building — '+p.name;
-  document.getElementById('bgrid').innerHTML=p.buildings.map(b=>`<div class="bcard" onclick="selBld('${b.id}')"><div class="bc-img"><img src="${b.img}" loading="lazy"><div class="bc-av">${b.avail} Available</div></div><div class="bc-body"><div class="bc-name">${b.name}</div><div class="bc-desc">${b.desc}</div><div class="bc-meta"><div class="bm"><div class="bm-l">Floors</div><div class="bm-v">${b.floors}</div></div><div class="bm"><div class="bm-l">Available</div><div class="bm-v" style="color:var(--g)">${b.avail}</div></div></div><button class="bc-cta" onclick="event.stopPropagation();selBld(\'${b.id}\')">Select ${b.name} →</button></div></div>`).join('');
-}
-function selBld(bid){mBid=bid;document.getElementById('mt1').textContent=bid;mGo(2);}
-function buildUnits(){
-  const p=PD[mPid];mType=mType||p.types[0];
-  document.getElementById('utcards').innerHTML=p.types.map(t=>`<div class="utc ${t===mType?'on':''}" onclick="selUT('${t}',this)"><div class="utc-ic">${p.ti[t]||'🏠'}</div><div><div class="utc-tp">${t}</div><div class="utc-ar">${(p.areas[t]||'').split('–')[0]}</div></div><div class="utc-pr">${(p.prices[t]||'').split('–')[0]}</div></div>`).join('');
-  updateMGlry();document.getElementById('mt2').textContent='Unit Types';
-}
-function selUT(t,el){mType=t;document.querySelectorAll('.utc').forEach(b=>b.classList.remove('on'));el.classList.add('on');updateMGlry();}
-function updateMGlry(){
-  const p=PD[mPid];gImgs=p.tgal[mType]||p.gallery;gCur=0;
-  const rm=p.rooms[mType]||[];
-  document.getElementById('rmtags').innerHTML=rm.map(r=>`<div class="rm-tag">${r}</div>`).join('');
-  document.getElementById('qsps').innerHTML=`<div class="qsp"><div class="qsp-v">${(p.areas[mType]||'—').split('–')[0]}</div><div class="qsp-l">Area</div></div><div class="qsp"><div class="qsp-v">${(p.prices[mType]||'—').split('–')[0]}</div><div class="qsp-l">From</div></div><div class="qsp"><div class="qsp-v">${rm.length}</div><div class="qsp-l">Rooms</div></div><div class="qsp"><div class="qsp-v">10%</div><div class="qsp-l">Booking</div></div>`;
-  buildMGlry();
-}
-function buildMGlry(){
-  const g=document.getElementById('glry');g.querySelectorAll('.gslide').forEach(s=>s.remove());
-  document.getElementById('gdts').innerHTML='';
-  gImgs.forEach((src,i)=>{const s=document.createElement('div');s.className='gslide'+(i===0?' on':'');s.innerHTML=`<img src="${src}" loading="lazy">`;g.insertBefore(s,g.firstChild);const d=document.createElement('div');d.className='gdot'+(i===0?' on':'');d.onclick=()=>mGalGo(i);document.getElementById('gdts').appendChild(d);});
-}
-function mGalGo(n){const sl=document.getElementById('glry').querySelectorAll('.gslide'),dt=document.getElementById('gdts').querySelectorAll('.gdot');sl[gCur].classList.remove('on');dt[gCur].classList.remove('on');gCur=n;sl[gCur].classList.add('on');dt[gCur].classList.add('on');}
-function gNext(){mGalGo((gCur+1)%gImgs.length);}function gPrev(){mGalGo((gCur-1+gImgs.length)%gImgs.length);}
-
-// 2-SLIDE WLV
-function wlvGo(n){
-  wlvCur=n;
-  document.getElementById('wlvSlider').style.transform=`translateX(-${n*100}%)`;
-  document.querySelectorAll('.wlv-dot').forEach((d,i)=>d.classList.toggle('on',i===n));
-}
-
-// All content shows by default — no observer needed
-
-// FAQ
-function fqT(btn){const fi=btn.closest('.fi'),was=fi.classList.contains('open');document.querySelectorAll('.fi').forEach(f=>f.classList.remove('open'));if(!was)fi.classList.add('open');}
-
-// FORM
-var ap='adv';
-function selPath(p){ap=p;['adv','view'].forEach(x=>{document.getElementById('fp-'+x).classList.toggle('sel',x===p);document.getElementById('fp-'+x).querySelector('.fhp-chk').textContent=x===p?'✓':'';});document.getElementById('fhft').textContent=p==='adv'?'Request an Advisory Call':'Book a Site Visit';document.getElementById('ffpri').textContent=p==='adv'?'Request Advisory Call →':'Book Viewing →';}
-function scrollFH(p){selPath(p);document.getElementById('findyourhome').scrollIntoView({behavior:'smooth'});}
-function wlvPrev(){wlvGo(Math.max(0,wlvCur-1));}
-function wlvNext(){wlvGo(Math.min(1,wlvCur+1));}
-function applyHeroSearch(){
-  // Read all 4 hero search dropdowns
-  var sels=document.querySelectorAll('.sbar .sfs');
-  var type=sels[1]?sels[1].value:'Any type';
-  var beds=sels[2]?sels[2].value:'Any';
-  // Map to filter
-  var filter='all';
-  if(type==='Apartment')filter='apt';
-  else if(type==='Villa')filter='vil';
-  else if(type==='Plot')filter='plt';
-  else if(type==='Commercial')filter='com';
-  // Apply filter
-  document.querySelectorAll('.ift').forEach(function(b){b.classList.remove('on');});
-  var targetBtn=document.querySelector('.ift[onclick*="'+filter+'"]');
-  if(targetBtn)targetBtn.classList.add('on');
-  else document.querySelector('.ift').classList.add('on');
-  document.querySelectorAll('.icard').forEach(function(c){
-    c.style.display=(filter==='all'||c.dataset.t===filter)?'flex':'none';
-  });
-  // Scroll
-  document.getElementById('inventory').scrollIntoView({behavior:'smooth'});
-}
-function hFF(e){
-  e.preventDefault();
-  var inputs=document.querySelectorAll('.fhform .ffi,.fhform .ffs');
-  var name=inputs[0]?inputs[0].value.trim():'';
-  var phone=inputs[1]?inputs[1].value.trim():'';
-  if(!name||!phone){alert('Please enter your name and phone number');return false;}
-  var b=document.getElementById('ffpri');
-  b.textContent='Received - we will call within 24h';
-  b.style.background='#0A1C0D';
-  b.style.color='#22C55E';
-  var pathLabel=(ap==='adv')?'book an advisory call':'book a viewing';
-  var msg='Hi Athars Team, this is '+name+'. I would like to '+pathLabel+'. My phone: '+phone;
-  setTimeout(function(){window.open('https://wa.me/923401111422?text='+encodeURIComponent(msg),'_blank');},800);
-  setTimeout(function(){
-    b.textContent=(ap==='adv')?'Request Advisory Call':'Book Viewing';
-    b.style.background='';
-    b.style.color='';
-    inputs.forEach(function(i){if(i.tagName==='INPUT')i.value='';});
-  },5000);
-}
-
-
-// LAZY VIDEO LOAD — only load when scrolled into view
-var legVid=document.getElementById('legVid');
-if(legVid){
-  var legObs=new IntersectionObserver(function(es){
-    es.forEach(function(e){
-      if(e.isIntersecting){
-        var s=e.target.querySelector('source[data-src]');
-        if(s&&!s.src){s.src=s.getAttribute('data-src');e.target.load();e.target.play().catch(function(){});}
-        legObs.unobserve(e.target);
-      }
-    });
-  },{threshold:0.1});
-  legObs.observe(legVid);
-}
-
-// FH VIDEO LAZY LOAD
-var fhVid=document.getElementById('fhVid');
-if(fhVid){
-  var fhObs=new IntersectionObserver(function(es){
-    es.forEach(function(e){
-      if(e.isIntersecting){
-        var s=e.target.querySelector('source[data-src]');
-        if(s&&!s.src){s.src=s.getAttribute('data-src');e.target.load();e.target.play().catch(function(){});}
-        fhObs.unobserve(e.target);
-      }
-    });
-  },{threshold:0.1});
-  fhObs.observe(fhVid);
-}
-
-
-// ESC key closes any open modal
-document.addEventListener('keydown', function(e){
-  if(e.key==='Escape'){
-    if(document.getElementById('udPop').classList.contains('open'))closeUD();
-    if(document.getElementById('modal').classList.contains('open'))closeModal();
-  }
-});
-
-
-function filterPort(status,btn){
-  document.querySelectorAll('.pft').forEach(function(b){b.classList.remove('on');});
-  btn.classList.add('on');
-  var cards=document.querySelectorAll('#portTrackFull .port-mini');
-  var anyShown=0;
-  cards.forEach(function(c){
-    var match=(status==='all')||(status==='booking'&&c.classList.contains('booking'))||(status==='delivered'&&!c.classList.contains('booking'));
-    c.style.display=match?'':'none';
-    if(match)anyShown++;
-  });
-  // Pause animation when filtered (since the duplicate set is also affected)
-  var track=document.getElementById('portTrackFull');
-  if(status==='all'){track.style.animationPlayState='running';}
-  else{track.style.animationPlayState='paused';}
-}
-
-
-// BOOKING SLIDER
-var bkCur=0;
-function bkGo(n){
-  bkCur=n;
-  document.getElementById('bkSlider').style.transform='translateX(-'+n*50+'%)';
-  document.querySelectorAll('.bk-dot').forEach(function(d,i){d.classList.toggle('on',i===n);});
-}
-// Auto-advance booking slider
-setInterval(function(){bkGo(bkCur===0?1:0);},5000);
-
-// PORTFOLIO FILTER
-function portFilter(type,btn){
-  document.querySelectorAll('.p-tab').forEach(function(b){b.classList.remove('on');});
-  btn.classList.add('on');
-  var track=document.getElementById('fpTrack');
-  var cards=track.querySelectorAll('.fp-mini');
-  cards.forEach(function(c){
-    var hasBk=c.querySelector('.fp-badge.bk')!==null;
-    var hasDv=c.querySelector('.fp-badge.dv')!==null;
-    if(type==='all'||(type==='bk'&&hasBk)||(type==='dv'&&hasDv)){
-      c.style.display='';
-    } else {
-      c.style.display='none';
-    }
-  });
-  if(type==='all'){track.classList.add('run');}
-  else{track.classList.remove('run');}
 }
 
 // SELF-TEST on load
